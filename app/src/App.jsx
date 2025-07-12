@@ -1,9 +1,10 @@
 import './App.css'
+import Router from "./Router"
 
 function App() {
   return (
     <>
-      <h1>Library Management System</h1>
+      <Router />
     </>
   )
 }
