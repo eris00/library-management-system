@@ -62,10 +62,10 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-primary text-secondary flex items-center justify-between shadow h-15">
-      <Link to="/" className="flex flex-row gap-4 items-center justify-center bg-primary-dark h-full px-6">
+    <nav className="bg-primary text-secondary flex items-center justify-between shadow w-full h-14">
+      <Link to="/" className="flex flex-row gap-3 items-center justify-center bg-primary-dark h-full px-6">
         <img src={Logo} alt="logo" className="h-10 w-10"/>
-        <h1 className="text-2xl  font-bold">LMS</h1>
+        <h1 className="text-md font-bold">Online Biblioteka</h1>
       </Link>
 
       <div className="flex items-center justify-center flex-row gap-8 px-6">
