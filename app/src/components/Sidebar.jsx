@@ -21,7 +21,7 @@ const Sidebar = () => {
   ];
 
   const bottomItems = [
-    { label: "Podešavanja", icon: Settings, isActive: false },
+    { label: "Podešavanja", icon: Settings, isActive: false, to: "/settings"},
   ];
 
   const MenuItem =({label, icon, to}) => {
@@ -96,7 +96,7 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-      <div className="w-17 flex-shrink-0"></div>
+      <div className="w-16 flex-shrink-0"></div>
     </>
 
   )
