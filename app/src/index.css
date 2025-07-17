@@ -1,21 +1,132 @@
 @import "tailwindcss";
 
-@theme {
-  --color-primary: #3392EA;
-  --color-primary-dark: #1C6FC4;
-  --color-secondary: #EBEEF4;
+:root {
+    --color-primary: #3392EA;
+    --color-primary-dark: #1C6FC4;
+    --color-secondary: #EBEEF4;
+  
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    text-align: center;
+    color-scheme: light;
+    color: #111;
+    background-color: #FFF;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  text-align: center;
-  color-scheme: light;
-  color: #111;
-  background-color: #FFF;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/*Ksenija*/
+body, html, #root {
+    height: 100%;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
 }
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('/background.jpg') no-repeat center center / cover;
+    padding: 1rem;
+}
+
+.register-form {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+}
+
+.register-form h2 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 1rem 0.75rem 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+}
+
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    color: #999;
+    font-size: 1rem;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: 0.2s;
+    background: white;
+    padding: 0 0.2rem;
+}
+
+.input-group input:focus + label,
+.input-group.filled label {
+    top: 0.3rem;
+    left: 0.65rem;
+    font-size: 0.75rem;
+    color: var(--color-primary);
+}
+
+.register-form button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.register-form button[type="submit"] {
+    background: var(--color-primary);
+    color: white;
+    font-weight: 500;
+}
+
+.register-form button[type="submit"]:hover {
+    background: var(--color-primary-dark);
+}
+
+.register-form button[type="submit"]:disabled {
+    background: #7f8c8d;
+    cursor: not-allowed;
+}
+
+.register-form button[type="button"] {
+    background: transparent;
+    color: #333;
+    border: 1px solid #dcdcdc;
+}
+
+.register-form .error {
+    color: red;
+    font-size: 0.9rem;
+}
+
+.register-form small {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: #999;
+}
+/* Ksenija */ 
