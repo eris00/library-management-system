@@ -1,0 +1,114 @@
+.sidebar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  height: calc(100vh - 83px);
+  width: 80px; /* collapsed width */
+  background: var(--secondary);
+  border-right: 1px solid #e5e7eb;
+  transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar--expanded {
+  width: 261px;
+}
+
+.sidebar__spacer {
+  width: 80px; /* keeps layout correct in flex parent */
+  flex-shrink: 0;
+}
+
+.sidebar__expand-btn-container {
+  display: flex;
+  padding: 14px;
+  height: 82px;
+  border-bottom: 1px solid var(--secondary-dark);
+}
+
+.sidebar__expand-btn {
+  padding: 8px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sidebar__expand-btn:hover {
+  background: #e5e7eb;
+}
+
+.sidebar__content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 48px); /* Adjust for button */
+  justify-content: space-between;
+}
+
+.sidebar__top-items {
+  padding: 16px 0 0 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar__bottom-items {
+  border-top: 1px solid #d1d5db;
+  padding: 12px 0 4px 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar__menu-item {
+  display: flex;
+  align-items: center;
+  padding: 30px 20px;
+  height: 44px;
+  color: #6b7280;
+  font-weight: 500;
+  text-decoration: none;
+  background: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.sidebar__menu-item:hover {
+  background: #f3f4f6;
+  color: var(--primary-dark);
+}
+
+.sidebar__menu-item--active {
+  background: #e0ecfa;
+  color: var(--primary-dark);
+}
+
+.sidebar__icon {
+  flex-shrink: 0;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.sidebar__menu-item--active .sidebar__icon,
+.sidebar__menu-item:hover .sidebar__icon {
+  color: var(--primary-dark);
+}
+
+.sidebar__label {
+  font-size: 1.12rem;
+  font-weight: 500;
+  margin-left: 0;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+
+
+
+

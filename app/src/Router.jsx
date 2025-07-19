@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import DashboardLayout from './layouts/dashboardLayout'
-import Activities from "./pages/Activities";
-import Dashboard from "./pages/Dashboard";
+import DashboardLayout from './layouts/DashboardLayout/DashboardLayout'
+import Activities from "./pages/Activities/Activities";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 const Router = () => {
   return (

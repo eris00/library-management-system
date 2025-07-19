@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useHeaderData from '../hooks/useHeaderData';
+import useHeaderData from '../../hooks/useHeaderData';
 
 const Activities = () => { 
     const { setHeaderData } = useHeaderData();

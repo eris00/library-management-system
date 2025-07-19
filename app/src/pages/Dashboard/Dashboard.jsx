@@ -1,4 +1,4 @@
-import useHeaderData from '../hooks/useHeaderData';
+import useHeaderData from '../../hooks/useHeaderData';
 import { useEffect } from "react";
 
 const Dashboard = () => {
@@ -7,8 +7,10 @@ const Dashboard = () => {
   useEffect(() => {
     setHeaderData({
       label: "Dashboard",
+
     });
-    return () => setHeaderData({ label: "", breadcrumbs: "", actions: null });
+
+    return () => setHeaderData({ label: "", breadcrumbs: [], actions: null });
   }, [setHeaderData]);
 
   return (

@@ -1,0 +1,30 @@
+.dashboard-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-top: 80px;
+  background: var(--secondary);
+
+}
+
+.dashboard-layout__navbar {
+  width: 100%;
+}
+
+.dashboard-layout__body {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+}
+
+.dashboard-layout__content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  background: #FFF;
+  min-height: calc(100vh - 56px);
+  flex: 1 1 0;
+} 

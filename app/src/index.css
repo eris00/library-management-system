@@ -1,15 +1,35 @@
-@import "tailwindcss";
 
-@theme {
-  --color-primary: #3392EA;
-  --color-primary-dark: #1C6FC4;
-  --color-secondary: #EBEEF4;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
 }
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --primary: #3392EA;
+  --primary-dark: #1C6FC4;
+  --primary-light: #68B8F7;
+  --secondary: #EBEEF4;
+  --secondary-dark: #D1D9E6;
+  --secondary-light: #F5F7FA;
+  font-family: 'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-size: 16px;
   text-align: center;
   color-scheme: light;
   color: #111;
