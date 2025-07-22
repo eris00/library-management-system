@@ -14,7 +14,9 @@ const Dashboard = () => {
   }, [setHeaderData]);
 
   return (
-    <div>Dashboard content</div>
+    <div>
+      Dashboard Page
+    </div>
   )
 }
 
