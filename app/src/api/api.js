@@ -6,12 +6,21 @@ const api = axios.create({
 
 const DEV_FALLBACK_TOKEN = ""; // token from Postman
 
+const anonymousRoutes = ['/login', '/register', '/forgot_password'];
+
 api.interceptors.request.use((config) => {
   config.headers['Accept'] = 'application/json';
 
-  let token = localStorage.getItem('token');
-  if (!token) token = DEV_FALLBACK_TOKEN;
-  if (token) config.headers['Authorization'] = `Bearer ${token}`;
+  const token = localStorage.getItem('token') || DEV_FALLBACK_TOKEN;;
+  const apiKey = import.meta.env.VITE_API_KEY;
+
+  const isAnonymousRoute = config.url && anonymousRoutes.some(route => config.url.endsWith(route));
+
+  if (isAnonymousRoute) {
+    config.headers['Authorization'] = `Bearer ${apiKey}`;
+  } else if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
 
   if (
     config.data &&
