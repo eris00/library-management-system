@@ -1,12 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
 import "./Dropdown.css";
 
-const Dropdown = ({ trigger, options }) => {
+const Dropdown = ({ trigger, children }) => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef();
 
-  // Klik van dropdown-a zatvara meni
   useEffect(() => {
     if (!open) return;
     function handleClickOutside(e) {
@@ -18,13 +16,13 @@ const Dropdown = ({ trigger, options }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside, true);
   }, [open]);
 
-  // Otvaranje/zatvaranje na klik
   const handleTriggerClick = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setOpen((v) => !v);
   };
 
-    return (
+  return (
     <div className="dropdown" ref={dropdownRef}>
       <div
         className="dropdown__trigger"
@@ -35,18 +33,7 @@ const Dropdown = ({ trigger, options }) => {
       </div>
       {open && (
         <div className="dropdown__menu">
-          {options.map(({ icon, label, to }, idx) => (
-            <Link
-              to={to}
-              className="dropdown__item"
-              key={idx}
-              tabIndex={0}
-              onClick={() => setOpen(false)}
-            >
-              <span className="dropdown__icon">{icon}</span>
-              <span className="dropdown__label">{label}</span>
-            </Link>
-          ))}
+          {children}
         </div>
       )}
     </div>

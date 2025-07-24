@@ -3,29 +3,34 @@ import { Bell, Plus, User, BookOpen, LibraryBig, PenLine, CircleUserRound, LogOu
 import Dropdown from "../ui/Dropdown/Dropdown";
 import Logo from "../../assets/logo.svg"
 import UserProfileImgTemp from "../../assets/user_profile_temp.jpg"
+import { useNavigate } from "react-router-dom";
 import './Navbar.css'
 
 const Navbar = () => {
+
+  const navigate = useNavigate();
+
   const addOptions = [
+
     {
       icon: <User className="navbar__dropdown-icon" />,
       label: 'Bibliotekar',
-      to: '/add-librarian',
+      onClick: () => navigate("/librarion"),
     },
     {
       icon: <BookOpen className="navbar__dropdown-icon" />,
       label: 'Učenik',
-      to: '/add-student',
+      onClick: () => navigate("/add-student"),
     },
     {
       icon: <LibraryBig className="navbar__dropdown-icon" />,
       label: 'Knjiga',
-      to: '/add-book',
+      onClick: () => navigate("/add-book"),
     },
     {
       icon: <PenLine className="navbar__dropdown-icon" />,
       label: 'Autor',
-      to: '/add-author',
+      onClick: () => navigate("/add-author"),
     },
   ];
 
@@ -33,12 +38,12 @@ const Navbar = () => {
     {
       icon: <CircleUserRound className="navbar__dropdown-icon" />,
       label: 'Profil',
-      to: '/profile',
+      onClick: () => navigate("/profile"),
     },
     {
       icon: <LogOut className="navbar__dropdown-icon" />,
       label: 'Odjavi se',
-      to: '/',
+      onClick: () => navigate("/login"), // handle logout here
     },
   ];
 
@@ -60,8 +65,16 @@ const Navbar = () => {
                 <Plus className="navbar__plus-icon" />
               </button>
             }
-            options={addOptions}
-          />
+          >
+            {addOptions.map(option => (
+              <div className="dropdown__item" onClick={() => option.onClick()} key={option.label}>
+                <div className="dropdown__item-content">
+                  <span className="dropdown__icon">{option.icon}</span>
+                  <span className="dropdown__label">{option.label}</span>
+                </div>
+              </div>
+            ))}
+          </Dropdown>
         </div>
         <div className="navbar__profile">
           <span className="navbar__profile-name">{"User"}</span>
@@ -71,8 +84,16 @@ const Navbar = () => {
                 <img src={UserProfileImgTemp} alt="user" className="navbar__profile-img" />
               </button>
             }
-            options={profileOptions}
-          />
+          >
+            {profileOptions.map(option => (
+              <div className="dropdown__item" onClick={() => option.onClick()} key={option.label}>
+                <div className="dropdown__item-content">
+                  <span className="dropdown__icon">{option.icon}</span>
+                  <span className="dropdown__label">{option.label}</span>
+                </div>
+              </div>
+            ))}
+          </Dropdown>
         </div>
       </div>
     </nav>
