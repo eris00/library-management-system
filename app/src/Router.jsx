@@ -9,7 +9,7 @@ import Register from "./pages/Register/Register";
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/" element={<DashboardLayout />}>
         <Route path="activities" element={<Activities />} />
