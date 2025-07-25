@@ -8,7 +8,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
   width: 100%;
 }
 
@@ -18,7 +17,6 @@
   width: 100%;
   height: auto;
 }
-
 
 .dropdown-icons {
   width: 18px;

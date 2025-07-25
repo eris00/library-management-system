@@ -19,3 +19,14 @@ export const getUser = async (userId) => {
     throw error;
   }
 }
+
+export const createNewStudent = async (studentData) => {
+  try {
+    const response = await api.post("/users/store", studentData);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error( error);
+    throw error; 
+  }
+}

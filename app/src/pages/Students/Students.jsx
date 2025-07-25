@@ -12,7 +12,6 @@ const Students = () => {
   useEffect(() => {
     setHeaderData({
       label: "Učenici",
-
     });
     return () => setHeaderData({ label: "", breadcrumbs: [], actions: null });
   }, [setHeaderData]);
@@ -23,26 +22,24 @@ const Students = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    let isMounted = true;
+    const controller = new AbortController();
     setLoading(true);
     setError(null);
 
-    getAllUsers().then(data => {
-      if(isMounted) {
-        const studentUsers = data.filter(user => user.role === "Učenik")
+    getAllUsers({ signal: controller.signal })
+      .then(data => {
+        const studentUsers = data.filter(user => user.role === "Učenik");
         setStudents(studentUsers);
-        
-      }
-    })
-    .catch((err) => {
-        if (isMounted) setError(err.message);
+      })
+      .catch((err) => {
+        if (err.name !== "AbortError") setError(err.message);
       })
       .finally(() => {
-        if (isMounted) setLoading(false);
+        setLoading(false);
       });
 
-    return () => { isMounted = false; };
-  }, [])
+    return () => controller.abort();
+  }, []);
 
   const filteredStudents = students.filter(student =>
     (student.name && student.name.toLowerCase().includes(search.toLowerCase())) ||

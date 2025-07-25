@@ -20,17 +20,17 @@ const Navbar = () => {
     {
       icon: <BookOpen className="navbar__dropdown-icon" />,
       label: 'Učenik',
-      onClick: () => navigate("/add-student"),
+      onClick: () => navigate("/create-student"),
     },
     {
       icon: <LibraryBig className="navbar__dropdown-icon" />,
       label: 'Knjiga',
-      onClick: () => navigate("/add-book"),
+      onClick: () => navigate("/create-book"),
     },
     {
       icon: <PenLine className="navbar__dropdown-icon" />,
       label: 'Autor',
-      onClick: () => navigate("/add-author"),
+      onClick: () => navigate("/create-author"),
     },
   ];
 
