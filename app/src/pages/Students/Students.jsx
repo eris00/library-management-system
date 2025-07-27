@@ -58,7 +58,7 @@ const Students = () => {
       ) : (
         <>
           <StudentsHeader search={search} setSearch={setSearch} />
-          <StudentsTable data={filteredStudents.reverse()} />
+          <StudentsTable data={filteredStudents.reverse()} setStudents={setStudents} />
         </>
       )}
 

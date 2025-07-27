@@ -33,7 +33,16 @@ export const createNewStudent = async (studentData) => {
 export const updateStudent = async (studentData, studentId) => {
   try {
     const response = await api.put(`/users/${studentId}`, studentData);
-    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export const deleteStudent = async (studentId) => {
+  try {
+    const response = await api.delete(`/users/${studentId}`);
     return response;
   } catch (error) {
     console.log(error);
