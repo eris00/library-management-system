@@ -3,7 +3,6 @@ import "./PageHeader.css";
 
 const PageHeader = ({label, breadcrumbs, actions}) => {
 
-  
   return (
     <div className="page-header">
       <div className="page-header__main">

@@ -13,18 +13,18 @@ const EditStudent = () => {
 
   const navigate = useNavigate();
   const { studentId } = useParams();
+  const { setHeaderData} = useHeaderData();
 
-  const { setHeaderData } = useHeaderData();
   useEffect(() => {
     setHeaderData({
-      label: "Novi Učenik",
+      label: "Izmijeni Učenika",
       breadcrumbs: [
         {label:"Svi učenici", to: "/students"},
-        {label:`ID-${studentId}`, to: "/edit-student"}
+        {label:`ID-${studentId}`, to: `students/edit-student/${studentId}`}
       ]
     });
     return () => setHeaderData({ label: "", breadcrumbs: [], actions: null });
-  }, [setHeaderData, studentId]);
+  }, [setHeaderData, studentId ]);
 
   // Fetch user
   const [studentData, setStudentData] = useState(null);

@@ -125,7 +125,7 @@ const RowMenu = ({ row, onDelete }) => {
   };
   const handleViewDetails = () => {
     handleMenuClose();
-    navigate(`student/${row.id}`)
+    navigate(`${row.id}`)
   };
 
   return (
