@@ -1,38 +1,9 @@
-import { useEffect, useState } from 'react'
-import "./CreateStudent.css";
-import useHeaderData from '../../hooks/useHeaderData';
+import { useState } from 'react'
 import { X, Check, Eye, EyeOff } from 'lucide-react';
-import { createNewStudent } from '../../api/UsersServices';
-import { toast } from "react-toastify";
 
-const CreateStudent = () => {
+const StudentForm = ({initialValues, onSubmit, submitting, errors}) => {
 
-  const { setHeaderData } = useHeaderData();
-  useEffect(() => {
-    setHeaderData({
-      label: "Novi Učenik",
-      breadcrumbs: [
-        {label:"Svi učenici", to: "/students"},
-        {label:"Novi učenik", to: "/create-student"}
-      ]
-    });
-    return () => setHeaderData({ label: "", breadcrumbs: [], actions: null });
-  }, [setHeaderData]);
-
-  const [form, setForm] = useState({
-    name: "",
-    surname: "",
-    jmbg: "",
-    email: "",
-    username: "",
-    password: "",
-    password_confirmation: "",
-    photoPath: "",
-    role_id: 2
-  });
-
-  const [errors, setErrors] = useState({});
-  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState(initialValues);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
 
@@ -43,70 +14,12 @@ const CreateStudent = () => {
     }));
   };
 
-const validate = () => {
-  const newErrors = {};
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const urlRegex = /^https?:\/\/[^\s]+$/i;
-
-  if (!form.photoPath.trim()) newErrors.photoPath = "Morate unijeti url fotografije!";
-  else if (!urlRegex.test(form.photoPath)) newErrors.photoPath = "Unesite validan URL (npr. http://...)!";
-  if (!form.name.trim()) newErrors.name = "Morate unijeti ime!";
-  if (!form.surname.trim()) newErrors.surname = "Morate unijeti prezime!";
-  if (!form.jmbg.trim()) newErrors.jmbg = "Morate unijeti JMBG!";
-  else if (form.jmbg.length !== 13) newErrors.jmbg = "JMBG mora sadržati tačno 13 brojeva";
-  if (!form.email.trim()) newErrors.email = "Morate unijeti email!";
-  else if (!emailRegex.test(form.email)) newErrors.email = "Unesite email u ispravnom formatu";
-
-  if (!form.username.trim()) newErrors.username = "Morate unijeti korisničko ime!";
-  if (!form.password.trim()) newErrors.password = "Morate unijeti šifru!";
-  else if (form.password.length < 8) newErrors.password = "Šifra mora imati bar 8 karaktera!";
-
-  if (!form.password_confirmation.trim()) newErrors.password_confirmation = "Morate ponovo unijeti šifru!";
-  if (form.password && form.password_confirmation && form.password !== form.password_confirmation) {
-    newErrors.password_confirmation = "Šifre se ne poklapaju!";
-  }
-
-  return newErrors;
-};
-
-  const handleSubmit = async (e) => {    
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const newErrors = validate();
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-    setErrors({});
-    setSubmitting(true);
-    try {
-      await createNewStudent(form);
-      toast.success("Uspješno ste dodali novog učenika!");
-    } catch (err) {
-      if (
-        err.response &&
-        err.response.status === 422 &&
-        err.response.data &&
-        err.response.data.data
-      ) {
-        const serverErrors = err.response.data.data;
-        const mappedErrors = {};
-        for (const key in serverErrors) {
-          if (Array.isArray(serverErrors[key])) {
-            mappedErrors[key] = serverErrors[key][0];
-          } else {
-            mappedErrors[key] = serverErrors[key];
-          }
-        }
-        setErrors(mappedErrors);
-      } else {
-        setErrors({ global: "Došlo je do greške, pokušajte kasnije!" });
-      }
-    } finally {
-      setSubmitting(false);
-    }
+    onSubmit(form);
   };
 
-  const handleCancel = () => {
+    const handleCancel = () => {
     setForm({
       name: "",
       surname: "",
@@ -119,6 +32,7 @@ const validate = () => {
       role_id: 2
     });
   }
+
 
   return (
     <form className="create-student-form" onSubmit={handleSubmit} autoComplete="off">
@@ -249,4 +163,4 @@ const validate = () => {
   )
 }
 
-export default CreateStudent
+export default StudentForm

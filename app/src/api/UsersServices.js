@@ -23,10 +23,20 @@ export const getUser = async (userId) => {
 export const createNewStudent = async (studentData) => {
   try {
     const response = await api.post("/users/store", studentData);
-    console.log(response);
     return response.data;
   } catch (error) {
     console.error( error);
     throw error; 
+  }
+}
+
+export const updateStudent = async (studentData, studentId) => {
+  try {
+    const response = await api.put(`/users/${studentId}`, studentData);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }

@@ -3,7 +3,8 @@ import DashboardLayout from './layouts/DashboardLayout/DashboardLayout'
 import Activities from "./pages/Activities/Activities";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Students from "./pages/Students/Students";
-import CreateStudent from "./pages/CreateStudent/CreateStudent";
+import CreateStudent from "./pages/Students/CreateStudent";
+import EditStudent from "./pages/Students/EditStudent";
 
 const Router = () => {
   return (
@@ -13,6 +14,7 @@ const Router = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/students" element={<Students />} />
         <Route path="/create-student" element={<CreateStudent />} />
+        <Route path="students/edit-student/:studentId" element={<EditStudent />} />
       </Route>
     </Routes>
   )
