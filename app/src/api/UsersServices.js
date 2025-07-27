@@ -49,3 +49,15 @@ export const deleteStudent = async (studentId) => {
     throw error;
   }
 }
+export const registerUser = async (userData) => {
+  try {
+    const response = await api.post('/register', userData);
+    const token = response.data.data.token;
+
+    localStorage.setItem("token", token);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

@@ -1,0 +1,101 @@
+.register-page {
+  background: url("../../assets/login.jpg") no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-form {
+  background: white;
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  width: 495px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+}
+
+.register-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 1rem 0.75rem 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  color: #999;
+  font-size: 1rem;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: 0.2s;
+  background: white;
+  padding: 0 0.2rem;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: 0.3rem;
+  left: 0.65rem;
+  font-size: 0.75rem;
+  color: #3392EA;
+}
+
+.register-form button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.register-form button[type="submit"] {
+  background: #3392EA;
+  color: white;
+  border: none;
+}
+
+.register-form button[type="submit"]:hover {
+  background: #1C6FC4;
+}
+
+.register-form button[type="submit"]:disabled {
+  background: #7f8c8d;
+  cursor: not-allowed;
+}
+
+.register-form button[type="button"] {
+  background: transparent;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+}
+
+small {
+  font-size: 0.7rem;
+  color: #999;
+  margin-top: 0.5rem;
+}
