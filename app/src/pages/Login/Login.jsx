@@ -14,12 +14,14 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setLoading(true); 
     setError("");
 
+  
     try {
-      const response = await api.post("/login", { email, password });
-      const token = response.data?.token;
+      const response = await api.post("/login", { username: email, password, device: "web" });
+
+      const token = response.data?.data?.token;
 
       if (token) {
         localStorage.setItem("token", token);
@@ -56,8 +58,8 @@ const Login = () => {
           <label htmlFor="email" className="input-label">Email</label>
           <input
             id="email"
-            type="email"
-            placeholder="example@example.net"
+            type="text"
+            placeholder="Username or email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
