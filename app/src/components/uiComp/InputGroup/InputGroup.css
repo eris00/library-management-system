@@ -1,0 +1,34 @@
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 1rem 0.75rem 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  color: #999;
+  font-size: 1rem;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: 0.2s;
+  background: white;
+  padding: 0 0.2rem;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: 0.3rem;
+  left: 0.65rem;
+  font-size: 0.75rem;
+  color: #3392EA;
+}
