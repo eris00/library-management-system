@@ -1,0 +1,166 @@
+.login-form {
+  width: 495px;
+  height: 429px;
+  padding: 32px;
+  gap: 16px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.login-title {
+  width: 431px;
+  height: 23px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0.15px;
+  text-align: center;
+  color: #00000099;
+  margin: 0 auto 16px auto;
+}
+
+.input-container {
+  width: 431px;
+  height: 66px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-label {
+  position: absolute;
+  top: -12px;
+  left: 10px;
+  background-color: #FFFFFF;
+  padding: 4px;
+  font-size: 12px;
+  font-family: "Roboto", sans-serif;
+  color: #3392EA;
+  z-index: 1;
+  width: 30px;
+  height: 14px;
+  font-weight: 400;
+  vertical-align: middle;
+}
+
+.input-field {
+  width: 431px;
+  height: 48px;
+  padding: 16px 12px 16px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #000;
+  background-color: #fff;
+  outline: none;
+  border: 1px solid #0000001F; 
+  box-sizing: border-box;
+}
+
+.input-field::placeholder {
+  color: #838383;
+  text-align: left;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+}
+
+.forgot-password-container {
+  width: 431px;
+  height: 36px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  opacity: 1;
+}
+
+.forgot-password-button {
+  padding: 10px 8px;
+  height: 36px;
+  background: none;
+  border: none;
+  color: #3392EA;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.login-button {
+  width: 431px;
+  height: 36px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  background-color: #3392EA;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  color: #FFFFFF;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1.25px;
+  user-select: none;
+  vertical-align: middle;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:disabled {
+  background-color: #8bbcf9;
+  cursor: not-allowed;
+}
+
+.create-account-button {
+  width: 431px;
+  height: 36px;
+  border-radius: 4px;
+  border: 1px solid #00000099;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 1;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1.25px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.footer-text {
+  width: 431px;
+  height: 24px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  vertical-align: middle;
+  color: rgba(0, 0, 0, 0.6);
+  opacity: 1;
+  margin: 16px auto 0 auto;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 10px;
+}
