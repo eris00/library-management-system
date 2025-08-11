@@ -6,6 +6,8 @@ import Students from "./pages/Students/Students";
 import CreateStudent from "./pages/Students/CreateStudent";
 import EditStudent from "./pages/Students/EditStudent";
 import StudentDetail from "./pages/Students/StudentDetail";
+import Login from "./pages/Login/Login"; 
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Register from "./pages/Register/Register";
 
 const Router = () => {
@@ -19,6 +21,8 @@ const Router = () => {
         <Route path="students/edit-student/:studentId" element={<EditStudent />} />
         <Route path="students/:studentId" element={<StudentDetail />} />
       </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/register" element={<Register />} />
     </Routes>
   );

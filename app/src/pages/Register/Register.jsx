@@ -11,8 +11,9 @@ export default function Register() {
     email: "",
     username: "",
     password: "",
-    password_confirmation: ""
+    password_confirmation: "",
   });
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -45,17 +46,27 @@ export default function Register() {
       setLoading(true);
       const response = await registerUser({
         ...formData,
-        device: "DivajsNejm2"
+        device: "DivajsNejm2",
       });
 
-      if (response.token) {
-        localStorage.setItem("token", response.token);
+      console.log("Register response:", response); // DEBUG
+
+      const token = response?.data?.data?.token;
+
+      if (token) {
+        localStorage.setItem("token", token);
         navigate("/dashboard");
       } else {
         setError("Registration failed.");
       }
     } catch (err) {
-      setError("Something went wrong.");
+      if (err.response?.data?.data) {
+        const firstKey = Object.keys(err.response.data.data)[0];
+        const message = err.response.data.data[firstKey][0];
+        setError(message);
+      } else {
+        setError("Something went wrong.");
+      }
     } finally {
       setLoading(false);
     }
@@ -67,39 +78,85 @@ export default function Register() {
         <h2>Register</h2>
 
         <div className="input-group">
-          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            placeholder=" "
+          />
           <label>First Name</label>
         </div>
 
         <div className="input-group">
-          <input type="text" name="surname" value={formData.surname} onChange={handleChange} required />
+          <input
+            type="text"
+            name="surname"
+            value={formData.surname}
+            onChange={handleChange}
+            required
+            placeholder=" "
+          />
           <label>Last Name</label>
         </div>
 
         <div className="input-group">
-          <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            placeholder=" "
+          />
           <label>Email</label>
         </div>
 
         <div className="input-group">
-          <input type="text" name="username" value={formData.username} onChange={handleChange} required />
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+            placeholder=" "
+          />
           <label>Username</label>
         </div>
 
         <div className="input-group">
-          <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            placeholder=" "
+          />
           <label>Password</label>
         </div>
 
         <div className="input-group">
-          <input type="password" name="password_confirmation" value={formData.password_confirmation} onChange={handleChange} required />
+          <input
+            type="password"
+            name="password_confirmation"
+            value={formData.password_confirmation}
+            onChange={handleChange}
+            required
+            placeholder=" "
+          />
           <label>Confirm Password</label>
         </div>
 
         {error && <p className="error">{error}</p>}
 
-        <button type="submit" disabled={loading}>{loading ? "Registering..." : "REGISTER"}</button>
-        <button type="button" onClick={() => navigate("/login")}>RETURN TO LOGIN</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Registering..." : "REGISTER"}
+        </button>
+        <button type="button" onClick={() => navigate("/login")}>
+          RETURN TO LOGIN
+        </button>
         <small>©2025 ICT Cortex. All rights reserved.</small>
       </form>
     </div>
