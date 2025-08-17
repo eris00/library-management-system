@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import AuthorForm from "./AuthorForm";
-import { getAuthorById, updateAuthor } from "../../api/AuthorsServices";
+import { getAuthor, updateAuthor } from "../../api/AuthorsServices";
 import "./Authors.css";
 
 const EditAuthor = () => {
@@ -18,7 +18,7 @@ const EditAuthor = () => {
   useEffect(() => {
     const fetchAuthor = async () => {
       try {
-        const data = await getAuthorById(id);
+        const data = await getAuthor(id);
         setAuthor(data);
       } catch (err) {
         toast.error("Greška pri učitavanju autora");

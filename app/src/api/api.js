@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-const DEV_FALLBACK_TOKEN = "131|Cis77QazURAXUpuur5R8Juu7jhpSw77GSdjRDrXn"; // token from Postman
+const DEV_FALLBACK_TOKEN = "203|jUOvE8XbsAVk7bm1UWBQQrPa4Pvbu4SeIgMgLBil"; // token from Postman
 
 const anonymousRoutes = ['/login', '/register', '/forgot_password'];
 

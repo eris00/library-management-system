@@ -9,7 +9,7 @@ const Authors = () => {
   const { setHeaderData } = useOutletContext();
   const navigate = useNavigate();
 
-  // Header (PageHeader u layoutu)
+  // Header 
   useEffect(() => {
     setHeaderData({
       label: "Autori",
@@ -19,6 +19,7 @@ const Authors = () => {
     return () => setHeaderData({ label: "", breadcrumbs: [], actions: null });
   }, [setHeaderData]);
 
+
   // State
   const [authors, setAuthors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,32 +28,32 @@ const Authors = () => {
 
   // Fetch
   useEffect(() => {
-    const controller = new AbortController();
-    setLoading(true);
-    setErr(null);
+  setLoading(true);
+  setErr(null);
 
-    getAllAuthors({ signal: controller.signal })
-      .then((data) => setAuthors(Array.isArray(data) ? data : (data?.data ?? [])))
-      .catch((e) => {
-        if (e.name !== "AbortError") setErr("Došlo je do greške, pokušajte kasnije.");
-      })
-      .finally(() => setLoading(false));
+  getAllAuthors()
+    .then((authors) => {
+      console.log("Dobijeni autori:", authors);
+      setAuthors(authors);
+    })
+    .catch((e) => {
+      console.error("Greška pri fetch-u autora:", e);
+      setErr("Došlo je do greške, pokušajte kasnije.");
+    })
+    .finally(() => setLoading(false));
+}, []);
 
-    return () => controller.abort();
-  }, []);
 
-  // Search (fleksibilno: pokriva {name,surname,first_name,last_name,email})
+  // Search 
   const filtered = useMemo(() => {
     const q = (search || "").toLowerCase();
     return authors.filter((a) => {
       const first = (a.first_name || a.firstName || a.name || "").toLowerCase();
       const last  = (a.last_name  || a.lastName  || a.surname || "").toLowerCase();
-      const email = (a.email || "").toLowerCase();
       const full  = `${first} ${last}`.trim();
       return (
         first.includes(q) ||
         last.includes(q) ||
-        email.includes(q) ||
         full.includes(q)
       );
     });
@@ -106,8 +107,8 @@ const Authors = () => {
               <tr>
                 <th>#</th>
                 <th>Ime i prezime</th>
-                <th>Email</th>
-                <th>Akcije</th>
+                <th>Opis</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>

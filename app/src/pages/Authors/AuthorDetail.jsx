@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getAuthor as getAuthorById, deleteAuthor } from "../../services/AuthorsServices";
+import { getAuthor, deleteAuthor } from "../../services/AuthorsServices";
 import "./Authors.css";
 
 const AuthorDetail = () => {
@@ -12,7 +12,7 @@ const AuthorDetail = () => {
   useEffect(() => {
     const fetchAuthor = async () => {
       try {
-        const data = await getAuthorById(id);
+        const data = await getAuthor(id);
         setAuthor(data);
       } catch (error) {
         console.error("Greška prilikom učitavanja autora:", error);
@@ -36,7 +36,6 @@ const AuthorDetail = () => {
   return (
     <div className="author-detail">
       <h2>{author.firstName} {author.lastName}</h2>
-      <p><strong>Datum rođenja:</strong> {author.birthDate}</p>
       <p><strong>Biografija:</strong> {author.biography}</p>
 
       <div className="author-detail__actions">
