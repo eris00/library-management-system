@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
-import "./Students.css";
 import useHeaderData from "../../hooks/useHeaderData";
-import StudentsTable from "./StudentsTable";
-import { getAllUsers } from "../../api/UsersServices";
+import { getAllBooks } from "../../api/BooksServices";
 import LoadingSpinner from "../../components/ui/LoadingSpinner/LoadingSpinner";
 import ErrorMessage from "../../components/ui/ErrorMessage/ErrorMessage";
-import StudentsHeader from "./StudentsHeader";
-const Students = () => {
+import BooksHeader from "./BooksHeader";
+import BooksTable from "./BooksTable";
+import "./Books.css";
+
+const Books = () => {
 
   const { setHeaderData } = useHeaderData();
   useEffect(() => {
     setHeaderData({
-      label: "Učenici",
+      label: "Knjige",
     });
     return () => setHeaderData({ label: "", breadcrumbs: [], actions: null });
   }, [setHeaderData]);
 
-  const [students, setStudents] = useState([]);
+  const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
@@ -26,10 +27,9 @@ const Students = () => {
     setLoading(true);
     setError(null);
 
-    getAllUsers({ signal: controller.signal })
+    getAllBooks({ signal: controller.signal })
       .then(data => {
-        const studentUsers = data.filter(user => user.role === "Učenik");
-        setStudents(studentUsers);
+        setBooks(data);
       })
       .catch((err) => {
         if (err.name !== "AbortError") setError(err.message);
@@ -39,31 +39,28 @@ const Students = () => {
       });
 
     return () => controller.abort();
-  }, []);
+  }, []);  
 
-  const filteredStudents = students.filter(student =>
-    (student.name && student.name.toLowerCase().includes(search.toLowerCase())) ||
-    (student.surname && student.surname.toLowerCase().includes(search.toLowerCase())) ||
-    (student.email && student.email.toLowerCase().includes(search.toLowerCase()))
-  );
+  const filteredBooks = books.filter(book => (book.title && book.title.toLowerCase().includes(search.toLowerCase())) || 
+                                    (book.authors && book.authors.map(author => author.name + " " + author.surname).join(", ").toLowerCase().includes(search.toLowerCase())) ||
+                                    (book.categories && book.categories.map(category => category.name).join(", ").toLowerCase().includes(search.toLowerCase()))
+                                  );
+  
 
   return (
-
-    
-    <div className="students-wrapper__main">
+    <div className="books-wrapper__main">
       {loading ? (
         <LoadingSpinner />
       ) : error ? (
         <ErrorMessage>Došlo je do greške, molimo Vas pokušajte kasnije!</ErrorMessage>
       ) : (
         <>
-          <StudentsHeader search={search} setSearch={setSearch} />
-          <StudentsTable data={filteredStudents.reverse()} setStudents={setStudents} />
+          <BooksHeader search={search} setSearch={setSearch} />
+          <BooksTable data={filteredBooks.reverse()} setBooks={setBooks} />
         </>
       )}
-
     </div>
   )
 }
 
-export default Students
+export default Books

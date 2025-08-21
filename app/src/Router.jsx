@@ -9,6 +9,8 @@ import StudentDetail from "./pages/Students/StudentDetail";
 import Login from "./pages/Login/Login"; 
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Register from "./pages/Register/Register";
+import Books from "./pages/Books/Books";
+import CreateBook from "./pages/Books/CreateBook";
 
 const Router = () => {
   return (
@@ -20,6 +22,9 @@ const Router = () => {
         <Route path="/create-student" element={<CreateStudent />} />
         <Route path="students/edit-student/:studentId" element={<EditStudent />} />
         <Route path="students/:studentId" element={<StudentDetail />} />
+
+        <Route path="/books" element={<Books />} />
+        <Route path="/create-book" element={<CreateBook />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/reset-password" element={<ResetPassword />} />

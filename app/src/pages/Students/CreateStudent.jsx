@@ -78,7 +78,7 @@ const CreateStudent = () => {
 
 
   return (
-    <StudentForm i
+    <StudentForm
       initialValues={emptyStudent} 
       onSubmit={handleSubmit} submitting={submitting} errors={errors} />
   )
