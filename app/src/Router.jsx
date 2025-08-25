@@ -10,7 +10,7 @@ import Login from "./pages/Login/Login";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Register from "./pages/Register/Register";
 import Books from "./pages/Books/Books";
-import CreateBook from "./pages/Books/CreateBook";
+import CreateBook from "./pages/Books/BookUpsert/CreateBook";
 
 const Router = () => {
   return (
