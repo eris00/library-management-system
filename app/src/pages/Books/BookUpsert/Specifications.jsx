@@ -1,24 +1,6 @@
 import Select from 'react-select'
 
-const Specifications = ({form, handleChange, errors, setForm}) => {
-
-  const scriptOptions = [
-    { value: 1, label: 'Pismo 1' },
-    { value: 2, label: 'Pismo 2' },
-    { value: 3, label: 'Pismo 3' }
-  ]
-
-  const bindingOptions = [
-    { value: 1, label: 'Povez 1' },
-    { value: 2, label: 'Povez 2' },
-    { value: 3, label: 'Povez 3' }
-  ]
-
-  const formatOptions = [
-    { value: 1, label: 'Format 1' },
-    { value: 2, label: 'Format 2' },
-    { value: 3, label: 'Format 3' }
-  ]
+const Specifications = ({form, handleChange, errors, setForm, scriptOptions, bindingOptions, formatOptions, languageOptions}) => {
 
   return (
 
@@ -41,7 +23,7 @@ const Specifications = ({form, handleChange, errors, setForm}) => {
           classNamePrefix="rs" 
           options={scriptOptions} 
           placeholder="Izaberite pismo"
-          value={scriptOptions.find(opt => form.script === opt.value)}
+          value={scriptOptions.find(opt => form.script === opt.value) ?? null}
           onChange={(selected) => {
             setForm(prev => ({
               ...prev,
@@ -53,12 +35,29 @@ const Specifications = ({form, handleChange, errors, setForm}) => {
       </div>
       <div>
         <Select
+          name="language"
+          className="form-select"
+          classNamePrefix="rs" 
+          options={languageOptions} 
+          placeholder="Izaberite jezik"
+          value={languageOptions.find(opt => form.language === opt.value) ?? null}
+          onChange={(selected) => {
+            setForm(prev => ({
+              ...prev,
+              language: selected.value
+            }));
+          }}
+        />
+        {errors.language && <div className="input-error">{errors.language}</div>}
+      </div>
+      <div>
+        <Select
           name="binding"
           className="form-select" 
           classNamePrefix="rs" 
           options={bindingOptions} 
           placeholder="Izaberite vrstu poveza"
-          value={bindingOptions.find(opt => form.binding === opt.value)}
+          value={bindingOptions.find(opt => form.binding === opt.value) ?? null}
           onChange={(selected) => {
             setForm(prev => ({
               ...prev,
@@ -75,7 +74,7 @@ const Specifications = ({form, handleChange, errors, setForm}) => {
           classNamePrefix="rs" 
           options={formatOptions} 
           placeholder="Izaberite vrstu formata"
-          value={formatOptions.find(opt => form.format === opt.value)}
+          value={formatOptions.find(opt => form.format === opt.value) ?? null}
           onChange={(selected) => {
             setForm(prev => ({
               ...prev,

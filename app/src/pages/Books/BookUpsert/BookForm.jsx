@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./CreateBooks.css";
 import BasicDetails from "./BasicDetails";
 import Specifications from "./Specifications";
 import Multimedia from "./Multimedia";
 import { X, Check } from 'lucide-react';
+import { getAllSelectDatas } from "../../../api/BooksServices";
 
 const BookForm = ({initialValues, onSubmit, submitting, errors}) => {
 
@@ -14,9 +15,6 @@ const BookForm = ({initialValues, onSubmit, submitting, errors}) => {
     setActiveTab(tabId);
   };
 
-  console.log("obj: ", form);
-  
-
   const handleChange = (e) => {
     setForm(prev => ({
       ...prev,
@@ -24,10 +22,64 @@ const BookForm = ({initialValues, onSubmit, submitting, errors}) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => {    
     e.preventDefault();
     onSubmit(form);
   };
+
+  const handleCancel = () => {
+    setForm({
+    "title": "",
+    "pageNumber": "",
+    "script": null,
+    "language": null,
+    "binding": null,
+    "format": null,
+    "publisher": null,
+    "publicationYear": "",
+    "isbn": "",
+    "quantity": "",
+    "summary": "",
+    "categories": [],
+    "genres": [],
+    "authors": [],
+    "pictures": "",
+  })
+  }
+
+  const [categoryOptions, setCategoryOptions] = useState([]);
+  const [genreOptions, setGenreOptions] = useState([]);
+  const [authorOptions, setAuthorOptions] = useState([]);
+  const [publisherOptions, setPublisherOptions] = useState([]);
+
+  const [scriptOptions, setScriptOptions] = useState([]);
+  const [bindingOptions, setBindingOptions] = useState([]);
+  const [formatOptions, setFormatOptions] = useState([]);
+  const [languageOptions, setLanguageOptions] = useState([]);
+
+  const makeOptions = (arr) => {
+    const options = arr.map(el => (
+      {
+        value: el.id,
+        label: el.name
+      }
+    ))
+    return options;
+  }
+
+  useEffect(() => {
+    getAllSelectDatas().then(data => {
+      setCategoryOptions(makeOptions(data.data.data.categories));
+      setGenreOptions(makeOptions(data.data.data.genres));
+      setAuthorOptions(data.data.data.authors.map(author => ({value: author.id, label: author.name + " " + author.surname})))
+      setPublisherOptions(makeOptions(data.data.data.publishers));
+      setScriptOptions(makeOptions(data.data.data.scripts));
+      setBindingOptions(makeOptions(data.data.data.bookbinds));
+      setFormatOptions(makeOptions(data.data.data.formats));
+      setLanguageOptions(makeOptions(data.data.data.languages));
+    })
+  }, [])
+
 
   return (
     <div className="book-detail">
@@ -55,10 +107,28 @@ const BookForm = ({initialValues, onSubmit, submitting, errors}) => {
       <div className="book-detail-content">
         <form className="create-book-form" onSubmit={handleSubmit}>
           {activeTab === 'osnovni-detalji' && (
-            <BasicDetails form={form} handleChange={handleChange} errors={errors} setForm={setForm} />
+            <BasicDetails 
+              form={form} 
+              handleChange={handleChange} 
+              errors={errors} 
+              setForm={setForm} 
+              categoryOptions={categoryOptions}
+              genreOptions={genreOptions}
+              authorOptions={authorOptions}
+              publisherOptions={publisherOptions}
+            />
           )}
           {activeTab === 'specifikacije' && (
-            <Specifications form={form} handleChange={handleChange} errors={errors} setForm={setForm} />
+            <Specifications 
+              form={form} 
+              handleChange={handleChange} 
+              errors={errors} 
+              setForm={setForm}
+              scriptOptions={scriptOptions}
+              bindingOptions={bindingOptions}
+              formatOptions={formatOptions}
+              languageOptions={languageOptions}
+            />
           )}
           {activeTab === 'multimedija' && (
             <Multimedia form={form} errors={errors} handleChange={handleChange} setForm={setForm} />

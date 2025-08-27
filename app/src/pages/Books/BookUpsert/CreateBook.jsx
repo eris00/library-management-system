@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react'
 import useHeaderData from '../../../hooks/useHeaderData';
 import BookForm from './BookForm';
+import { bookValidate } from '../../../utils/validations';
+import { mapBookFormToApi } from '../../../utils/bookToApiTransformer';
+import { createNewBook } from '../../../api/BooksServices';
+import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 
 const CreateBook = () => {
 
@@ -17,6 +22,30 @@ const CreateBook = () => {
   }, [setHeaderData]);
 
   const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (formValues) => {
+    const newErrors = bookValidate(formValues);
+    
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    setErrors({});
+    setSubmitting(true);
+
+    try {
+      const newBook = mapBookFormToApi(formValues)
+      await createNewBook(newBook);
+      toast.success("Uspješno ste dodali novu knjigu!");
+      navigate("/books");
+    } catch (err) {    
+      console.log("is err: ", err);
+    } finally {
+      setSubmitting(false);
+    } 
+  }
 
   // book type
   const emptyBook = {
@@ -31,7 +60,6 @@ const CreateBook = () => {
     "isbn": null,
     "quantity": null,
     "summary": "",
-    "deletePdfs": null,
     "categories": [],
     "genres": [],
     "authors": [],
@@ -40,7 +68,7 @@ const CreateBook = () => {
 
   return (
     <div>
-      <BookForm initialValues={emptyBook} errors={errors} />
+      <BookForm initialValues={emptyBook} onSubmit={handleSubmit} submitting={submitting} errors={errors} />
     </div>
   )
 }

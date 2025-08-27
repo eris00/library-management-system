@@ -1,30 +1,6 @@
 import Select from 'react-select'
 
-const BasicDetails = ({form, handleChange, errors, setForm}) => {
-
-  const categoryOptions = [
-    { value: 1, label: 'Kategorija 1' },
-    { value: 2, label: 'Kategorija 2' },
-    { value: 3, label: 'Kategorija 3' }
-  ]
-
-  const genreOptions = [
-    { value: 1, label: 'Žanr 1' },
-    { value: 2, label: 'Žanr 2' },
-    { value: 3, label: 'Žanr 3' }
-  ]
-
-  const authorOptions = [
-    { value: 1, label: 'Author 1' },
-    { value: 2, label: 'Author 2' },
-    { value: 3, label: 'Author 3' }
-  ]
-
-    const publisherOptions = [
-    { value: 1, label: 'Izdavač 1' },
-    { value: 2, label: 'Izdavač 2' },
-    { value: 3, label: 'Izdavač 3' }
-  ]
+const BasicDetails = ({form, handleChange, errors, setForm, categoryOptions, genreOptions, authorOptions, publisherOptions}) => {
 
   return (
     <div className="input-fields-wrapper">
@@ -111,7 +87,7 @@ const BasicDetails = ({form, handleChange, errors, setForm}) => {
           classNamePrefix="rs" 
           options={publisherOptions} 
           placeholder="Unesite izdavača"
-          value={publisherOptions.find(opt => form.publisher === opt.value)}
+          value={publisherOptions.find(opt => form.publisher === opt.value) ?? null}
           onChange={(selected) => {
             setForm(prev => ({
               ...prev,

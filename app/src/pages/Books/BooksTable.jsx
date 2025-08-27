@@ -152,7 +152,7 @@ const RowMenu = ({ row, onDelete }) => {
 
   const handleEdit = () => {
     handleMenuClose();
-    navigate(`edit-student/${row.id}`)
+    navigate(`edit-book/${row.id}`)
   };
   const handleDelete = () => {
     handleMenuClose();

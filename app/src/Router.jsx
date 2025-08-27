@@ -11,6 +11,7 @@ import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Register from "./pages/Register/Register";
 import Books from "./pages/Books/Books";
 import CreateBook from "./pages/Books/BookUpsert/CreateBook";
+import UpdateBook from "./pages/Books/BookUpsert/UpdateBook";
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
 
         <Route path="/books" element={<Books />} />
         <Route path="/create-book" element={<CreateBook />} />
+        <Route path="/books/edit-book/:bookId" element={<UpdateBook />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/reset-password" element={<ResetPassword />} />
