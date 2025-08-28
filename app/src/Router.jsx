@@ -7,7 +7,8 @@ import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import Register from "./pages/Register/Register";
 import Authors from "./pages/Authors/Authors";
 import CreateAuthor from "./pages/Authors/CreateAuthor";
-/*import EditAuthor from "./pages/Authors/EditAuthor"; */
+import EditAuthor from "./pages/Authors/EditAuthor";
+import AuthorDetail from "./pages/Authors/AuthorDetail";
 
 const Router = () => {
   return (
@@ -18,7 +19,9 @@ const Router = () => {
         <Route path="activities" element={<Activities />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="authors" element={<Authors />} /> 
-        <Route path="/add-author" element={<CreateAuthor />} />
+        <Route path="add-author" element={<CreateAuthor />} />
+        <Route path="authors/edit/:id" element={<EditAuthor />} />
+        <Route path="authors/:id" element={<AuthorDetail />} /> 
       </Route>
       <Route path="/register" element={<Register />} />
     </Routes>
@@ -26,8 +29,3 @@ const Router = () => {
 };
 
 export default Router;
-
-
-/*  <Route path="authors/create" element={<CreateAuthor />} />
-        <Route path="authors/edit/:id" element={<EditAuthor />} />
-        <Route path="authors/:id" element={<AuthorDetail />} /> */

@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./Authors.css";
 
 const emptyAuthor = {
-  first_name: "",
-  last_name: "",
+  name: "",
+  surname: "",
   photoPath: "",
   bio: ""
 };
@@ -34,23 +34,23 @@ export default function AuthorForm({ initialValues = emptyAuthor, onSubmit, subm
       <div className="authors-row-2">
         <div>
           <input
-            name="first_name"
+            name="name"
             className="authors-input"
             placeholder="Unesite ime"
-            value={form.first_name}
+            value={form.name}
             onChange={handleChange}
           />
-          {errors.first_name && <div className="authors-input__error">{errors.first_name}</div>}
+          {errors.name && <div className="authors-input__error">{errors.name}</div>}
         </div>
         <div>
           <input
-            name="last_name"
+            name="surname"
             className="authors-input"
             placeholder="Unesite prezime"
-            value={form.last_name}
+            value={form.surname}
             onChange={handleChange}
           />
-          {errors.last_name && <div className="authors-input__error">{errors.last_name}</div>}
+          {errors.surname && <div className="authors-input__error">{errors.surname}</div>}
         </div>
       </div>
 

@@ -7,8 +7,8 @@ import "./Authors.css";
 
 const validate = (v) => {
   const e = {};
-  if (!v.first_name?.trim()) e.first_name = "Morate unijeti ime!";
-  if (!v.last_name?.trim()) e.last_name = "Morate unijeti prezime!";
+  if (!v.name?.trim()) e.name = "Morate unijeti ime!";
+  if (!v.surname?.trim()) e.surname = "Morate unijeti prezime!";
   return e;
 };
 
@@ -44,4 +44,4 @@ export default function CreateAuthor() {
   };
 
   return <AuthorForm onSubmit={handleSubmit} submitting={submitting} errors={errors} />;
-}
+} 

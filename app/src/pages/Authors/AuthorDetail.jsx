@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getAuthor, deleteAuthor } from "../../services/AuthorsServices";
+import { getAuthor, deleteAuthor } from "../../api/AuthorsServices";
 import "./Authors.css";
 
 const AuthorDetail = () => {
@@ -35,8 +35,8 @@ const AuthorDetail = () => {
 
   return (
     <div className="author-detail">
-      <h2>{author.firstName} {author.lastName}</h2>
-      <p><strong>Biografija:</strong> {author.biography}</p>
+      <h2>{author.name} {author.surname}</h2>
+      <p><strong>Biografija:</strong> {author.bio}</p>
 
       <div className="author-detail__actions">
         <button className="btn-primary" onClick={() => navigate(`/authors/edit/${id}`)}>Uredi</button>

@@ -9,7 +9,7 @@ const Authors = () => {
   const { setHeaderData } = useOutletContext();
   const navigate = useNavigate();
 
-  // Header 
+  // Header
   useEffect(() => {
     setHeaderData({
       label: "Autori",
@@ -19,43 +19,38 @@ const Authors = () => {
     return () => setHeaderData({ label: "", breadcrumbs: [], actions: null });
   }, [setHeaderData]);
 
-
   // State
   const [authors, setAuthors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
   const [search, setSearch] = useState("");
+  const [openMenuId, setOpenMenuId] = useState(null);
 
   // Fetch
   useEffect(() => {
-  setLoading(true);
-  setErr(null);
+    setLoading(true);
+    setErr(null);
 
-  getAllAuthors()
-    .then((authors) => {
-      console.log("Dobijeni autori:", authors);
-      setAuthors(authors);
-    })
-    .catch((e) => {
-      console.error("Greška pri fetch-u autora:", e);
-      setErr("Došlo je do greške, pokušajte kasnije.");
-    })
-    .finally(() => setLoading(false));
-}, []);
+    getAllAuthors()
+      .then((authors) => {
+        console.log("Dobijeni autori:", authors);
+        setAuthors(authors);
+            })
+      .catch((e) => {
+        console.error("Greška pri fetch-u autora:", e);
+        setErr("Došlo je do greške, pokušajte kasnije.");
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
-
-  // Search 
+  // Search
   const filtered = useMemo(() => {
     const q = (search || "").toLowerCase();
     return authors.filter((a) => {
       const first = (a.first_name || a.firstName || a.name || "").toLowerCase();
-      const last  = (a.last_name  || a.lastName  || a.surname || "").toLowerCase();
-      const full  = `${first} ${last}`.trim();
-      return (
-        first.includes(q) ||
-        last.includes(q) ||
-        full.includes(q)
-      );
+      const last = (a.last_name || a.lastName || a.surname || "").toLowerCase();
+      const full = `${first} ${last}`.trim();
+      return first.includes(q) || last.includes(q) || full.includes(q);
     });
   }, [authors, search]);
 
@@ -95,79 +90,97 @@ const Authors = () => {
         </div>
       </div>
 
-      {/* Tabela / state */}
+      {/* Lista */}
       {loading ? (
         <div className="authors-state">Učitavanje...</div>
       ) : err ? (
         <div className="authors-error">{err}</div>
       ) : (
         <div className="authors-table__wrapper">
-          <table className="authors-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Ime i prezime</th>
-                <th>Opis</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="authors-empty">Nema podataka.</td>
-                </tr>
-              ) : (
-                filtered.map((a) => {
-                  const first = a.first_name || a.firstName || a.name || "";
-                  const last  = a.last_name  || a.lastName  || a.surname || "";
-                  const full  = `${first} ${last}`.trim() || first || last || "—";
-                  return (
-                    <tr key={a.id}>
-                      <td>{a.id}</td>
-                      <td className="authors-name-cell">
-                        {a.photoPath || a.photo_url ? (
-                          <img
-                            className="authors-avatar"
-                            src={a.photoPath || a.photo_url}
-                            alt={full}
-                          />
-                        ) : (
-                          <div className="authors-avatar--placeholder">
-                            <BookUser size={16} />
-                          </div>
-                        )}
-                        <span>{full}</span>
-                      </td>
-                      <td>{a.email || "—"}</td>
-                      <td className="authors-actions">
+          {/* Header */}
+          <div className="authors-row authors-row--header">
+            <div className="authors-col authors-col--name">
+              <input type="checkbox" className="authors-checkbox" />
+              <span className="authors-col-title">Naziv autora</span>
+            </div>
+            <div className="authors-col authors-col--desc">
+              <span className="authors-col-title">Opis</span>
+            </div>
+            <div className="authors-col authors-col--actions"></div>
+          </div>
+
+          {/* Rows */}
+          {filtered.length === 0 ? (
+            <div className="authors-empty">Nema podataka.</div>
+          ) : (
+            filtered.map((a) => {
+              const first = a.first_name || a.firstName || a.name || "";
+              const last = a.last_name || a.lastName || a.surname || "";
+             // const bio = a.bio;
+              const full =
+                `${first} ${last}`.trim() || first || last || "—";
+
+              return (
+                <div className="authors-row" key={a.id}>
+                  {/* Checkbox + slika + ime */}
+                  <div className="authors-col authors-col--name">
+                    <input type="checkbox" className="authors-checkbox" />
+                    {a.photoPath || a.photo_url ? (
+                      <img
+                        className="authors-avatar"
+                        src={a.photoPath || a.photo_url}
+                        alt={full}
+                      />
+                    ) : (
+                      <div className="authors-avatar--placeholder">
+                        <BookUser size={16} />
+                      </div>
+                    )}
+                    <span className="authors-name">{full}</span>
+                  </div>
+
+                  {/* Opis */}
+                  <div className="authors-col authors-col--desc">
+                    {a.description || a.bio || a.about || a.opis || "Lorem Ipsum is simply dummy text ..." }
+                  </div>
+
+                  {/* Akcije (3 tačke) */}
+                  <div className="authors-col authors-col--actions">
+                    <button
+                      className="authors-icon-btn"
+                      title="Opcije"
+                      onClick={() =>
+                        setOpenMenuId(openMenuId === a.id ? null : a.id)
+                      }
+                    >
+                      <EllipsisVertical size={18} />
+                    </button>
+
+                    {openMenuId === a.id && (
+                      <div className="authors-menu">
                         <button
-                          className="authors-icon-btn"
-                          title="Detalji"
                           onClick={() => navigate(`/authors/${a.id}`)}
                         >
-                          <EllipsisVertical size={18} />
+                          <EllipsisVertical size={14} /> Pogledaj detalje
                         </button>
                         <button
-                          className="authors-icon-btn"
-                          title="Izmijeni"
                           onClick={() => navigate(`/authors/edit/${a.id}`)}
                         >
-                          <Pen size={18} />
+                          <Pen size={14} /> Izmijeni autora
                         </button>
                         <button
-                          className="authors-icon-btn danger"
-                          title="Obriši"
+                          className="danger"
                           onClick={() => handleDelete(a.id)}
                         >
-                          <Trash size={18} />
+                          <Trash size={14} /> Izbriši autora
                         </button>
-                      </td>
-                    </tr>
-                  );
-                })
-              )}
-            </tbody>
-          </table>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
       )}
     </div>

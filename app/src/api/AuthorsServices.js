@@ -14,9 +14,10 @@ export const getAuthor = async (id, config = {}) => {
 
 // Kreiranje autora
 export const createNewAuthor = async (payload, config = {}) => {
-  const { data } = await api.post("/authors", payload, config);
+  const { data } = await api.post("/authors/store", payload, config);
   return data.data;
 };
+
 
 // Ažuriranje autora
 export const updateAuthor = async (id, payload, config = {}) => {
