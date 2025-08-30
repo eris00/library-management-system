@@ -13,6 +13,7 @@ const AuthorDetail = () => {
     const fetchAuthor = async () => {
       try {
         const data = await getAuthor(id);
+        console.log("API autor:", data); 
         setAuthor(data);
       } catch (error) {
         console.error("Greška prilikom učitavanja autora:", error);
@@ -35,12 +36,27 @@ const AuthorDetail = () => {
 
   return (
     <div className="author-detail">
-      <h2>{author.name} {author.surname}</h2>
-      <p><strong>Biografija:</strong> {author.bio}</p>
+      <img
+        className="author-detail__image"
+        src={author.photo_url || author.photoPath || "https://kadkakozasto.com/wp-content/uploads/2023/01/Kad-Kako-Zasto-37.jpg"}
+        alt={`${author.name || ""} ${author.surname || ""}`}
+      />
+
+      <div className="author-detail__section">
+        <h4 className="author-detail__label">Ime i Prezime</h4>
+        <p className="author-detail__value">
+          {author.name} {author.surname}
+        </p>
+      </div>
+
+      <div className="author-detail__section">
+        <h4 className="author-detail__label">Opis</h4>
+        <p className="author-detail__value">{author.bio}</p>
+      </div>
 
       <div className="author-detail__actions">
         <button className="btn-primary" onClick={() => navigate(`/authors/edit/${id}`)}>Uredi</button>
-        <button className="btn-danger" onClick={handleDelete}>Obriši</button>
+        <button className="btn-danger"  onClick={handleDelete}>Obriši</button>
       </div>
     </div>
   );

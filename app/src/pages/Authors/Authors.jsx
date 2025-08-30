@@ -116,7 +116,6 @@ const Authors = () => {
             filtered.map((a) => {
               const first = a.first_name || a.firstName || a.name || "";
               const last = a.last_name || a.lastName || a.surname || "";
-             // const bio = a.bio;
               const full =
                 `${first} ${last}`.trim() || first || last || "—";
 
@@ -125,11 +124,12 @@ const Authors = () => {
                   {/* Checkbox + slika + ime */}
                   <div className="authors-col authors-col--name">
                     <input type="checkbox" className="authors-checkbox" />
-                    {a.photoPath || a.photo_url ? (
+                    {a.photoPath || "https://kadkakozasto.com/wp-content/uploads/2023/01/Kad-Kako-Zasto-37.jpg" || a.photo_url ? (
                       <img
                         className="authors-avatar"
-                        src={a.photoPath || a.photo_url}
+                        src={a.photoPath || a.photo_url || "https://kadkakozasto.com/wp-content/uploads/2023/01/Kad-Kako-Zasto-37.jpg" }
                         alt={full}
+                        
                       />
                     ) : (
                       <div className="authors-avatar--placeholder">
@@ -141,7 +141,7 @@ const Authors = () => {
 
                   {/* Opis */}
                   <div className="authors-col authors-col--desc">
-                    {a.description || a.bio || a.about || a.opis || "Lorem Ipsum is simply dummy text ..." }
+                    {a.bio || a.description || a.about || a.opis || "Lorem Ipsum is simply dummy text ..." }
                   </div>
 
                   {/* Akcije (3 tačke) */}
