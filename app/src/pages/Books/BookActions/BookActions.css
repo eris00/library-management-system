@@ -1,0 +1,84 @@
+
+/* RentBook */
+.rent-book-wrapper {
+  display: flex;
+  gap: 3.8rem;
+  width: 55vw;
+  padding: 1rem;
+}
+
+.rent-book-main {
+  flex-direction: column;
+  width: 30vw;
+}
+
+.rent-book-main h2 {
+  text-align: start;
+  margin-bottom: 0.7rem;
+}
+
+.rent-book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rent-book-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.reserve-book-row {
+  display: flex;
+}
+
+.row-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.reserve-row-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.reserve-row-section input {
+  width: 27rem;
+  height: 2.8rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 0 0.8rem;
+  font-size: 1rem;
+  background: #fff;
+}
+
+
+.row-section input {
+  width: 14vw;
+  height: 2.8rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 0 0.8rem;
+  font-size: 1rem;
+  background: #fff;
+}
+
+.row-section span {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  text-align: start;
+  color: #5e5d5d;
+}
+
+.book-quantities-rent {
+  border: #a8a7a799 solid 1px;
+  padding: 1rem 0.5rem;
+  width: 22rem;
+  border-radius: 5px;
+}
+
+.book-quantities-rent h3 {
+  text-align: start;
+  padding: 1rem 0 1.3rem 1rem;
+}

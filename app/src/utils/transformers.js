@@ -49,6 +49,7 @@ export const mapBookFormToApi = (form) => {
 export const mapBookFromApiToView = (book) => {
 
   return {
+    id: book.id,
     title: book.title,
     summary: book.description,
     categories: book.categories.map(category => category.id),
@@ -63,6 +64,14 @@ export const mapBookFromApiToView = (book) => {
     binding: book.bookbind.id,
     format: book.format.id,
     isbn: book.isbn,
-    pictures: book.pictures.map(picture => picture.path).join(", ")
+    pictures: book.pictures.map(picture => picture.path).join(", "),
+    photo: book.photo, // cover photo
+    ableToBorrow: book.ableToBorrow,
+    ableToReserve: book.ableToReserve,
+    borrowSamples: book.bSamples,
+    freeSamples: book.fSamples,
+    reservedSamples: book.rSamples,
+    rating: book.rating,
+
   }
 }

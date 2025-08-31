@@ -131,3 +131,39 @@ export const bookValidate = (form) => {
 
   return errors;
 };
+
+export const rentBookValidate = (student, startDate, endDate) => {
+  const newErrors = {};
+
+  if (!student) {
+    newErrors.student = "Morate izabrati učenika!";
+  }
+
+  if (!startDate) {
+    newErrors.startDate = "Morate unijeti datum izdavanja!";
+  } else if (isNaN(new Date(startDate).getTime())) {
+    newErrors.startDate = "Unesite validan datum!";
+  }
+
+  if (!endDate) {
+    newErrors.endDate = "Morate unijeti datum vraćanja!";
+  } else if (isNaN(new Date(endDate).getTime())) {
+    newErrors.endDate = "Unesite validan datum!";
+  }
+  return newErrors;
+};
+
+export const reserveBookValidate = (student, startDate) => {
+  const newErrors = {};
+
+  if (!student) {
+    newErrors.student = "Morate izabrati učenika!";
+  }
+
+  if (!startDate) {
+    newErrors.startDate = "Morate unijeti datum izdavanja!";
+  } else if (isNaN(new Date(startDate).getTime())) {
+    newErrors.startDate = "Unesite validan datum!";
+  }
+  return newErrors;
+};

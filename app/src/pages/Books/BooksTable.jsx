@@ -160,7 +160,7 @@ const RowMenu = ({ row, onDelete }) => {
   };
   const handleViewDetails = () => {
     handleMenuClose();
-    navigate(`${row.id}`)
+    navigate(`book-detail/${row.id}`)
   };
 
   return (

@@ -89,8 +89,6 @@ const Sidebar = () => {
           </div>
         </div>
       </aside>
-      {/* Placeholder for layout shift */}
-      <div className="sidebar__spacer"></div>
     </>
   );
 }

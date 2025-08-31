@@ -5,6 +5,7 @@ import Specifications from "./Specifications";
 import Multimedia from "./Multimedia";
 import { X, Check } from 'lucide-react';
 import { getAllSelectDatas } from "../../../api/BooksServices";
+import { makeOptions } from "../../../utils/bookUtils";
 
 const BookForm = ({initialValues, onSubmit, submitting, errors}) => {
 
@@ -51,21 +52,10 @@ const BookForm = ({initialValues, onSubmit, submitting, errors}) => {
   const [genreOptions, setGenreOptions] = useState([]);
   const [authorOptions, setAuthorOptions] = useState([]);
   const [publisherOptions, setPublisherOptions] = useState([]);
-
   const [scriptOptions, setScriptOptions] = useState([]);
   const [bindingOptions, setBindingOptions] = useState([]);
   const [formatOptions, setFormatOptions] = useState([]);
   const [languageOptions, setLanguageOptions] = useState([]);
-
-  const makeOptions = (arr) => {
-    const options = arr.map(el => (
-      {
-        value: el.id,
-        label: el.name
-      }
-    ))
-    return options;
-  }
 
   useEffect(() => {
     getAllSelectDatas().then(data => {
@@ -78,7 +68,7 @@ const BookForm = ({initialValues, onSubmit, submitting, errors}) => {
       setFormatOptions(makeOptions(data.data.data.formats));
       setLanguageOptions(makeOptions(data.data.data.languages));
     })
-  }, [])
+  }, []);
 
 
   return (

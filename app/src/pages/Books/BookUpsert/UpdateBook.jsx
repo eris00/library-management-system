@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useHeaderData from "../../../hooks/useHeaderData";
 import { useEffect, useState } from 'react';
 import { bookValidate } from '../../../utils/validations';
-import { mapBookFormToApi, mapBookFromApiToView } from '../../../utils/bookToApiTransformer';
+import { mapBookFormToApi, mapBookFromApiToView } from '../../../utils/transformers';
 import { getBookById, updateBook } from '../../../api/BooksServices';
 import { toast } from 'react-toastify';
 import LoadingSpinner from '../../../components/ui/LoadingSpinner/LoadingSpinner';
@@ -28,7 +28,7 @@ const UpdateBook = () => {
     return () => setHeaderData({ label: "", breadcrumbs: [], actions: null });
   }, [setHeaderData, bookId]);
 
-  // Fetch user
+  // Fetch book
   const [bookData, setBookData] = useState(null);
   const [fetchBookError, setFetchBookError] = useState(null);
   const [fetchBookLoading, setFetchBookLoading] = useState(true);

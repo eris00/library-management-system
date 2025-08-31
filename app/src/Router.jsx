@@ -12,6 +12,10 @@ import Register from "./pages/Register/Register";
 import Books from "./pages/Books/Books";
 import CreateBook from "./pages/Books/BookUpsert/CreateBook";
 import UpdateBook from "./pages/Books/BookUpsert/UpdateBook";
+import BookDetail from "./pages/Books/BookDetail/BookDetail";
+import RentBook from "./pages/Books/BookActions/RentBook";
+import ReserveBook from "./pages/Books/BookActions/ReserveBook";
+
 
 const Router = () => {
   return (
@@ -27,6 +31,9 @@ const Router = () => {
         <Route path="/books" element={<Books />} />
         <Route path="/create-book" element={<CreateBook />} />
         <Route path="/books/edit-book/:bookId" element={<UpdateBook />} />
+        <Route path="/books/book-detail/:bookId" element={<BookDetail />} />
+        <Route path="/books/rent-book/:bookId" element={<RentBook />} />
+        <Route path="/books/reserve-book/:bookId" element={<ReserveBook />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/reset-password" element={<ResetPassword />} />
