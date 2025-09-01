@@ -3,7 +3,7 @@ import api from "./api";
 export const getAllBorrowings = async () => {
   try {
     const response = await api.get("books/borrows");
-    return response.data
+    return response.data.data
   } catch (error) {
     console.log(error);
     throw error;

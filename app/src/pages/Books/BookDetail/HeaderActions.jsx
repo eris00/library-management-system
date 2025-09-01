@@ -31,8 +31,7 @@ const HeaderActions = ({bookId}) => {
         <>
       <button 
         className="student-detail__edit-btn"
-        onClick={ () => {console.log("otpisi");
-        }}
+        onClick={ () => { navigate(`/books/writeoff-book/${bookId}`); }}
       >
         <ClipboardMinus className="student-detail__btn" />
         Otpiši knjigu
@@ -46,8 +45,7 @@ const HeaderActions = ({bookId}) => {
       </button>
       <button 
         className="student-detail__edit-btn"
-        onClick={ () => {console.log("otpisi");
-        }}
+        onClick={ () => { navigate(`/books/return-book/${bookId}`); }}
       >
         <BookDown className="student-detail__btn" />
         Vrati knjigu

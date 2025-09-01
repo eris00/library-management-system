@@ -64,7 +64,7 @@ const BookDetail = () => {
   return (
     fetchBookLoading ? (
       <LoadingSpinner />
-    ) : fetchBookError ? (
+    ) : fetchBookError && errors ? (
       <ErrorMessage>Došlo je do greške, molimo Vas pokušajte kasnije!</ErrorMessage>
     ) : (
       <div className="page">

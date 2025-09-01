@@ -17,11 +17,11 @@ const Sidebar = () => {
     { label: "Učenici", icon: GraduationCap, to: "/students"  },
     { label: "Knjige", icon: Book, to: "/books"  },
     { label: "Autori", icon: FileText, to: "/authors"  },
-    { label: "Izdavanje knjiga", icon: BookOpen, to: "/publishers"  },
+    { label: "Izdavanje knjiga", icon: BookOpen, to: "/rent-evidentions"  },
   ];
 
   const bottomItems = [
-    { label: "Podešavanja", icon: Settings, isActive: false, to: "/settings"},
+    { label: "Podešavanja", icon: Settings, isActive: false, to: "/"},
   ];
 
   const MenuItem =({label, icon, to}) => {

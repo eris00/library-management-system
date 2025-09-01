@@ -1,0 +1,60 @@
+.rental-evidention-wrapper {
+  display: flex;
+  height: auto;
+}
+
+.rental-menu {
+  margin-top: 4rem;
+  width: 13vw;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem
+}
+
+.rental-content {
+  flex: 1;
+}
+
+.rental-menu-button {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+  width: 100%;
+  text-align: start;
+}
+
+.rental-menu-button:hover {
+  background: #eeeef0;
+  color: var(--primary-dark);
+}
+
+.rental-menu-button.active {
+  background: #e0ecfa;
+  color: var(--primary-dark);
+}
+
+.sidebar__expand-btn {
+  padding: 8px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.divider {
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+}
+
+.rented-table__wrapper {
+  width: 81vw;
+}

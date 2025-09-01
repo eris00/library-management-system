@@ -82,3 +82,14 @@
   text-align: start;
   padding: 1rem 0 1.3rem 1rem;
 }
+
+.writeoff-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin: 1.5rem;
+}
+
+.writeoff {
+  margin: 2rem 2rem;
+}
