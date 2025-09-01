@@ -1,24 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Librarians.css";
 
 const emptyLibrarian = {
-  firstName: "",
-  lastName: "",
+  name: "",
+  surname: "",
   email: "",
-  role: "",
-  photoPath: "",
-  jmbg: "",
   username: "",
   password: "",
-  confirmPassword: ""
+  confirmPassword: "",
+  photoPath: "",
+  jmbg: "",
 };
 
 export default function LibrarianForm({ initialValues = emptyLibrarian, onSubmit, submitting, errors = {} }) {
   const [form, setForm] = useState({ ...emptyLibrarian, ...initialValues });
 
+  useEffect(() => {
+    setForm({ ...emptyLibrarian, ...initialValues });
+  }, [initialValues]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm(prev => ({ ...prev, [name]: value }));
   };
 
   const handleCancel = () => setForm(emptyLibrarian);
@@ -30,6 +33,7 @@ export default function LibrarianForm({ initialValues = emptyLibrarian, onSubmit
 
   return (
     <form className="authors-form" onSubmit={handleSubmit} autoComplete="off">
+      {/* Photo */}
       <div>
         <input
           name="photoPath"
@@ -41,40 +45,31 @@ export default function LibrarianForm({ initialValues = emptyLibrarian, onSubmit
         {errors.photoPath && <div className="authors-input__error">{errors.photoPath}</div>}
       </div>
 
+      {/* Name & Surname */}
       <div className="authors-row-2">
         <div>
           <input
-            name="firstName"
+            name="name"
             className="authors-input"
             placeholder="Unesite ime"
-            value={form.firstName}
+            value={form.name}
             onChange={handleChange}
           />
-          {errors.firstName && <div className="authors-input__error">{errors.firstName}</div>}
+          {errors.firstName && <div className="authors-input__error">{errors.name}</div>}
         </div>
         <div>
           <input
-            name="lastName"
+            name="surname"
             className="authors-input"
             placeholder="Unesite prezime"
-            value={form.lastName}
+            value={form.surname}
             onChange={handleChange}
           />
-          {errors.lastName && <div className="authors-input__error">{errors.lastName}</div>}
+          {errors.lastName && <div className="authors-input__error">{errors.surname}</div>}
         </div>
       </div>
 
-      <div>
-        <input
-          name="role"
-          className="authors-input"
-          placeholder="Tip korisnika"
-          value={form.role}
-          onChange={handleChange}
-        />
-        {errors.role && <div className="authors-input__error">{errors.role}</div>}
-      </div>
-
+      {/* JMBG */}
       <div>
         <input
           name="jmbg"
@@ -87,7 +82,8 @@ export default function LibrarianForm({ initialValues = emptyLibrarian, onSubmit
         {errors.jmbg && <div className="authors-input__error">{errors.jmbg}</div>}
       </div>
 
-        <div>
+      {/* Email */}
+      <div>
         <input
           name="email"
           className="authors-input"
@@ -98,6 +94,7 @@ export default function LibrarianForm({ initialValues = emptyLibrarian, onSubmit
         {errors.email && <div className="authors-input__error">{errors.email}</div>}
       </div>
 
+      {/* Username */}
       <div>
         <input
           name="username"
@@ -109,6 +106,7 @@ export default function LibrarianForm({ initialValues = emptyLibrarian, onSubmit
         {errors.username && <div className="authors-input__error">{errors.username}</div>}
       </div>
 
+      {/* Password */}
       <div>
         <input
           name="password"
@@ -121,6 +119,7 @@ export default function LibrarianForm({ initialValues = emptyLibrarian, onSubmit
         {errors.password && <div className="authors-input__error">{errors.password}</div>}
       </div>
 
+      {/* Confirm Password */}
       <div>
         <input
           name="confirmPassword"
@@ -133,11 +132,13 @@ export default function LibrarianForm({ initialValues = emptyLibrarian, onSubmit
         {errors.confirmPassword && <div className="authors-input__error">{errors.confirmPassword}</div>}
       </div>
 
+      {/* Buttons */}
       <div className="authors-form__buttons">
         <button className="authors-btn__primary" type="submit" disabled={submitting}>✓ SAČUVAJ</button>
         <button className="authors-btn__secondary" type="button" onClick={handleCancel} disabled={submitting}>X PONIŠTI</button>
       </div>
 
+      {/* Global error */}
       {errors.global && <div className="authors-input__error authors-input__error--global">{errors.global}</div>}
     </form>
   );

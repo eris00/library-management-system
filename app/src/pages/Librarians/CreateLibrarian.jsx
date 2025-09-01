@@ -2,35 +2,20 @@ import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { toast } from "react-toastify";
 import LibrarianForm from "./LibrarianForm"; 
-import { createNewLibrarian } from "../../api/LibrariansServices"; 
-import "./Librarians.css";
+import { createNewLibrarian } from "../../api/LibrariansServices";
 
 const validate = (v) => {
   const e = {};
-  if (!v.firstName?.trim()) e.firstName = "Morate unijeti ime!";
-  if (!v.lastName?.trim()) e.lastName = "Morate unijeti prezime!";
+  if (!v.name?.trim()) e.name = "Morate unijeti ime!";
+  if (!v.surname?.trim()) e.surname = "Morate unijeti prezime!";
   if (!v.email?.trim()) e.email = "Morate unijeti email!";
-  if (!v.role?.trim()) e.role = "Morate unijeti tip korisnika!";
-
-  if (!v.jmbg?.trim()) {
-    e.jmbg = "Morate unijeti JMBG!";
-  } else if (!/^\d{13}$/.test(v.jmbg)) {
-    e.jmbg = "JMBG mora imati tačno 13 cifara!";
-  }
-
   if (!v.username?.trim()) e.username = "Morate unijeti korisničko ime!";
-
-  if (!v.password) {
-    e.password = "Morate unijeti šifru!";
-  } else if (v.password.length < 6) {
-    e.password = "Šifra mora imati najmanje 6 karaktera!";
-  }
-
-  if (!v.confirmPassword) {
-    e.confirmPassword = "Morate ponoviti unos šifre!";
-  } else if (v.password !== v.confirmPassword) {
-    e.confirmPassword = "Šifre se ne poklapaju!";
-  }
+  if (!v.jmbg) e.jmbg = "Morate unijeti JMBG!";
+  else if (v.jmbg.length !== 13) e.jmbg = "Mora imati 13 karaktera!";
+  if (!v.password) e.password = "Morate unijeti šifru!";
+  else if (v.password.length < 6) e.password = "Šifra mora imati najmanje 6 karaktera!";
+  if (!v.confirmPassword) e.confirmPassword = "Morate ponoviti šifru!";
+  else if (v.password !== v.confirmPassword) e.confirmPassword = "Šifre se ne poklapaju!";
   return e;
 };
 
@@ -60,7 +45,16 @@ export default function CreateLibrarian() {
     setSubmitting(true);
 
     try {
-      await createNewLibrarian(formValues);
+      await createNewLibrarian({
+        name: formValues.name,
+        surname: formValues.surname,
+        email: formValues.email,
+        username: formValues.username,
+        password: formValues.password,
+        password_confirmation: formValues.confirmPassword, 
+        photoPath: formValues.photoPath || "",
+        jmbg: formValues.jmbg || "",
+      });
       toast.success("Bibliotekar je uspješno kreiran!");
       navigate("/librarians");
     } catch (err) {

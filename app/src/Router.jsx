@@ -12,7 +12,7 @@ import AuthorDetail from "./pages/Authors/AuthorDetail";
 import Librarians from "./pages/Librarians/Librarians";
 import CreateLibrarian from "./pages/Librarians/CreateLibrarian";
 import EditLibrarian from "./pages/Librarians/EditLibrarian";
-import LibrarianDetails from "./pages/Librarians/LibrarianDetails";
+import LibrarianDetail from "./pages/Librarians/LibrarianDetail";
 
 const Router = () => {
   return (
@@ -29,7 +29,7 @@ const Router = () => {
         <Route path="librarians" element={<Librarians />} />
         <Route path="add-librarian" element={<CreateLibrarian />} />
         <Route path="librarians/edit/:id" element={<EditLibrarian />} />
-        <Route path="librarians/:id" element={<LibrarianDetails />} />
+        <Route path="librarians/:id" element={<LibrarianDetail />} />
       </Route>
       <Route path="/register" element={<Register />} />
     </Routes>

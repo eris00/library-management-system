@@ -1,32 +1,55 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+/*import { useEffect, useState } from "react";
+import { useParams, useNavigate, useOutletContext } from "react-router-dom";
+import { toast } from "react-toastify";
 import { getLibrarian, deleteLibrarian } from "../../api/LibrariansServices";
 import "./Librarians.css";
 
-const LibrarianDetails = () => {
+export default function LibrarianDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { setHeaderData } = useOutletContext();
   const [librarian, setLibrarian] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Postavljanje header-a
+  useEffect(() => {
+    setHeaderData({
+      label: "Detalji bibliotekara",
+      breadcrumbs: [
+        { label: "Evidencija bibliotekara", to: "/librarians" },
+        { label: "Detalji bibliotekara", to: `/librarians/${id}` },
+      ],
+      actions: null,
+    });
+    return () => setHeaderData({ label: "", breadcrumbs: [], actions: null });
+  }, [setHeaderData, id]);
+
+  // Učitavanje bibliotekara sa API-ja
   useEffect(() => {
     const fetchLibrarian = async () => {
       try {
         const data = await getLibrarian(id);
         setLibrarian(data);
-      } catch (error) {
-        console.error("Greška prilikom učitavanja bibliotekara:", error);
+      } catch (err) {
+        toast.error("Bibliotekar nije pronađen!");
+        navigate("/librarians");
       } finally {
         setLoading(false);
       }
     };
     fetchLibrarian();
-  }, [id]);
+  }, [id, navigate]);
 
+  // Brisanje bibliotekara
   const handleDelete = async () => {
     if (window.confirm("Da li ste sigurni da želite obrisati ovog bibliotekara?")) {
-      await deleteLibrarian(id);
-      navigate("/librarians");
+      try {
+        await deleteLibrarian(id);
+        toast.success("Bibliotekar je obrisan.");
+        navigate("/librarians");
+      } catch (err) {
+        toast.error("Došlo je do greške prilikom brisanja.");
+      }
     }
   };
 
@@ -38,12 +61,12 @@ const LibrarianDetails = () => {
       <img
         className="author-detail__image"
         src={librarian.photoPath || "https://kadkakozasto.com/wp-content/uploads/2023/01/Kad-Kako-Zasto-37.jpg"}
-        alt={`${librarian.firstName} ${librarian.lastName}`}
+        alt={`${librarian.name} ${librarian.surname}`}
       />
 
       <div className="author-detail__section">
         <h4 className="author-detail__label">Ime i Prezime</h4>
-        <p className="author-detail__value">{librarian.firstName} {librarian.lastName}</p>
+        <p className="author-detail__value">{librarian.name} {librarian.surname}</p>
       </div>
 
       <div className="author-detail__section">
@@ -72,6 +95,5 @@ const LibrarianDetails = () => {
       </div>
     </div>
   );
-};
-
-export default LibrarianDetails;
+}
+*/
