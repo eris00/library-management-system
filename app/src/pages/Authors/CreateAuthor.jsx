@@ -8,7 +8,7 @@ import "./Authors.css";
 const validate = (v) => {
   const e = {};
   if (!v.name?.trim()) e.name = "Morate unijeti ime!";
-  if (!v.surname?.trim()) e.surname = "Morate unijeti prezime!";
+  if (!v.surname?.trim()) e.last_name = "Morate unijeti prezime!";
   return e;
 };
 
