@@ -2,9 +2,8 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  margin-top: 80px;
+  /* margin-top: 80px; */
   background: var(--secondary);
-
 }
 
 .dashboard-layout__navbar {
@@ -25,6 +24,5 @@
   width: 100%;
   min-width: 0;
   background: #FFF;
-  min-height: calc(100vh - 56px);
   flex: 1 1 0;
 } 

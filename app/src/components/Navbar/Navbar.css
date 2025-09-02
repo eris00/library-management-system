@@ -3,8 +3,8 @@
   background: var(--primary);
   color: var(--secondary);
   display: flex;
-  position: fixed;
-  top: 0;
+  /* position: fixed;
+  top: 0; */
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 8px rgba(20, 34, 54, 0.06);

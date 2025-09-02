@@ -4,14 +4,12 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-const DEV_FALLBACK_TOKEN = "131|Cis77QazURAXUpuur5R8Juu7jhpSw77GSdjRDrXn"; // token from Postman
-
 const anonymousRoutes = ['/login', '/register', '/forgot_password'];
 
 api.interceptors.request.use((config) => {
   config.headers['Accept'] = 'application/json';
 
-  const token = DEV_FALLBACK_TOKEN; //localStorage.getItem('token') ||
+  const token = localStorage.getItem('token');
   const apiKey = import.meta.env.VITE_API_KEY;
 
   const isAnonymousRoute = config.url && anonymousRoutes.some(route => config.url.endsWith(route));

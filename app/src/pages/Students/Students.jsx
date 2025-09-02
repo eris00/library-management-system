@@ -49,7 +49,7 @@ const Students = () => {
 
   return (
 
-   
+    
     <div className="students-wrapper__main">
       {loading ? (
         <LoadingSpinner />

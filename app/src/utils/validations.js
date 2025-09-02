@@ -25,3 +25,145 @@ export const studentValidate = (form) => {
 
   return newErrors;
 };
+
+export const bookValidate = (form) => {
+  if (!form) return {};
+
+  const errors = {};
+
+  const isNonEmptyString = (val) => typeof val === "string" && val.trim().length > 0;
+  const isEmpty = (val) =>
+    val === null ||
+    val === undefined ||
+    (typeof val === "string" && val.trim() === "");
+
+  const isNumLike = (val) =>
+    (typeof val === "number" && Number.isFinite(val)) ||
+    (typeof val === "string" && /^\d+$/.test(val.trim()));
+
+  const mustBeNumLike = (field, label) => {
+    const val = form[field];
+    if (isEmpty(val)) {
+      errors[field] = `Morate unijeti ${label}!`;
+    } else if (!isNumLike(val)) {
+      errors[field] = `${label} mora biti broj!`;
+    }
+  };
+
+  const mustBeIsbn13 = (field, label) => {
+  const val = form[field];
+  if (isEmpty(val)) {
+    errors[field] = `Morate unijeti ${label}!`;
+    return;
+  }
+  if (typeof val === "string") {
+    const s = val.trim();
+    if (!/^\d{13}$/.test(s)) {
+      errors[field] = `${label} mora imati tačno 13 cifara!`;
+    }
+  } else if (typeof val === "number") {
+    if (!Number.isInteger(val) || val < 1e12 || val > 9999999999999) {
+      errors[field] = `${label} mora imati tačno 13 cifara!`;
+    }
+  } else {
+    errors[field] = `${label} mora imati tačno 13 cifara!`;
+  }
+};
+
+  const mustBeIdArray = (field, label) => {
+    const arr = form[field];
+    if (!Array.isArray(arr) || arr.length === 0) {
+      errors[field] = `${label} mora sadržati barem jedan ID.`;
+      return;
+    }
+    if (!arr.every(isNumLike)) {
+      errors[field] = `${label} smije sadržati samo brojeve (ID-jeve).`;
+    }
+  };
+
+  const LABEL = {
+    title: "naslov",
+    pageNumber: "broj stranica",
+    script: "pismo",
+    language: "jezik",
+    binding: "povez",
+    format: "format",
+    publisher: "izdavača",
+    publicationYear: "godinu izdavanja",
+    isbn: "ISBN",
+    quantity: "količinu",
+    summary: "opis",
+    categories: "kategorije",
+    genres: "žanrove",
+    authors: "autore",
+    pictures: "slike",
+  };
+
+  if (!isNonEmptyString(form.title)) {
+    errors.title = `Morate unijeti ${LABEL.title}!`;
+  }
+
+  mustBeNumLike("pageNumber", LABEL.pageNumber);
+
+  ["script", "language", "binding", "format", "publisher"].forEach((f) =>
+    mustBeNumLike(f, LABEL[f])
+  );
+
+  mustBeNumLike("publicationYear", LABEL.publicationYear);
+
+  mustBeIsbn13("isbn", LABEL.isbn);
+
+  mustBeNumLike("quantity", LABEL.quantity);
+
+  if (!isNonEmptyString(form.summary)) {
+    errors.summary = `Morate unijeti ${LABEL.summary}!`;
+  }
+
+  mustBeIdArray("categories", LABEL.categories);
+  mustBeIdArray("genres", LABEL.genres);
+  mustBeIdArray("authors", LABEL.authors);
+
+  if (isEmpty(form.pictures) || typeof form.pictures !== "string") {
+    errors.pictures = `Polje ${LABEL.pictures} mora biti neprazan string!`;
+  } else if (!isNonEmptyString(form.pictures)) {
+    errors.pictures = `Morate unijeti ${LABEL.pictures}!`;
+  }
+
+  return errors;
+};
+
+export const rentBookValidate = (student, startDate, endDate) => {
+  const newErrors = {};
+
+  if (!student) {
+    newErrors.student = "Morate izabrati učenika!";
+  }
+
+  if (!startDate) {
+    newErrors.startDate = "Morate unijeti datum izdavanja!";
+  } else if (isNaN(new Date(startDate).getTime())) {
+    newErrors.startDate = "Unesite validan datum!";
+  }
+
+  if (!endDate) {
+    newErrors.endDate = "Morate unijeti datum vraćanja!";
+  } else if (isNaN(new Date(endDate).getTime())) {
+    newErrors.endDate = "Unesite validan datum!";
+  }
+  return newErrors;
+};
+
+export const reserveBookValidate = (student, startDate) => {
+  const newErrors = {};
+
+  if (!student) {
+    newErrors.student = "Morate izabrati učenika!";
+  }
+
+  if (!startDate) {
+    newErrors.startDate = "Morate unijeti datum izdavanja!";
+  } else if (isNaN(new Date(startDate).getTime())) {
+    newErrors.startDate = "Unesite validan datum!";
+  }
+  return newErrors;
+};

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import background from "../../assets/login.jpg";
 import api from "../../api/api";
+import useAuthStore from "../../store/authStore";
 import "./Login.css";
 
 const Login = () => {
@@ -11,20 +12,25 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const login = useAuthStore((state) => state.login);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
     setError("");
 
-  
     try {
-      const response = await api.post("/login", { username: email, password, device: "web" });
+      const response = await api.post("/login", { 
+        username: email, 
+        password, 
+        device: "web" 
+      });
 
       const token = response.data?.data?.token;
 
       if (token) {
-        localStorage.setItem("token", token);
+        login(null, token);
+        await useAuthStore.getState().fetchMe();
         navigate("/dashboard");
       } else {
         setError("Login failed. Invalid response from server.");

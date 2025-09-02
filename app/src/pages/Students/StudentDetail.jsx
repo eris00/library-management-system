@@ -9,6 +9,7 @@ import { Pen, EllipsisVertical, Trash } from 'lucide-react';
 import Dropdown from "../../components/ui/Dropdown/Dropdown";
 import { deleteStudent } from "../../api/UsersServices";
 import { toast } from "react-toastify";
+import RentEvidentionPage from "../RentEvidention/RentEvidentionPage";
 
 const StudentDetail = () => {
 
@@ -154,8 +155,7 @@ const StudentDetail = () => {
 
         {activeTab === 'evidencija-iznajmljivanja' && (
           <div>
-           {/* Render RentalEvidention Component here */}
-           <p>Evidencija iznajmljivanja...</p>
+           <RentEvidentionPage />
           </div>
         )}
       </div>

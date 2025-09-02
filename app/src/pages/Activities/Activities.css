@@ -1,0 +1,60 @@
+
+.rents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rent-item {
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+}
+
+.rent-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.rent-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.rent-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.rent-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.rent-text .librarian {
+  color: #3366cc;
+  font-weight: 500;
+}
+
+.rent-text .book {
+  font-weight: 600;
+}
+
+.rent-text .student {
+  color: #3366cc;
+  font-weight: 500;
+}
+
+.rent-meta {
+  font-size: 13px;
+  text-align: start;
+  color: #555;
+  white-space: nowrap;
+  margin-left: 20px;
+}

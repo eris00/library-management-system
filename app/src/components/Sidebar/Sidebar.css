@@ -1,5 +1,6 @@
 .sidebar {
-  position: fixed;
+  position: sticky;
+  top: 0;
   top: 80px;
   left: 0;
   height: calc(100vh - 83px);
@@ -15,12 +16,6 @@
 .sidebar--expanded {
   width: 261px;
 }
-
-.sidebar__spacer {
-  width: 80px; /* keeps layout correct in flex parent */
-  flex-shrink: 0;
-}
-
 .sidebar__expand-btn-container {
   display: flex;
   padding: 14px;

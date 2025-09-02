@@ -26,6 +26,11 @@ button {
   --secondary: #EBEEF4;
   --secondary-dark: #D1D9E6;
   --secondary-light: #F5F7FA;
+  --green: #009E0F;
+  --orange: #FF9900;
+  --blue: #3392EA;
+  --red: #CF2A27;
+  --gray: #00000099;
   font-family: 'Roboto', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

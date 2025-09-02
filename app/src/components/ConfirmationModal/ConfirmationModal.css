@@ -54,3 +54,11 @@
 .modal-btn.cancel:hover {
   color: #333;
 }
+
+.error-text {
+  display: block;
+  color: #FF2C2C;
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 2rem;
+}
