@@ -5,10 +5,14 @@ import Logo from "../../assets/logo.svg"
 import UserProfileImgTemp from "../../assets/user_profile_temp.jpg"
 import { useNavigate } from "react-router-dom";
 import './Navbar.css'
+import useAuthStore from "../../store/authStore";
 
 const Navbar = () => {
 
   const navigate = useNavigate();
+  const loading = useAuthStore((state) => state.loading);
+  const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
 
   const addOptions = [
 
@@ -43,7 +47,10 @@ const Navbar = () => {
     {
       icon: <LogOut className="navbar__dropdown-icon" />,
       label: 'Odjavi se',
-      onClick: () => navigate("/login"), // handle logout here
+      onClick: () => {
+        logout();
+        navigate("/login");
+      },
     },
   ];
 
@@ -77,7 +84,13 @@ const Navbar = () => {
           </Dropdown>
         </div>
         <div className="navbar__profile">
-          <span className="navbar__profile-name">{"User"}</span>
+          <span className="navbar__profile-name">
+          {loading 
+            ? "Loading..." 
+            : user 
+              ? `${user.name} ${user.surname}` 
+              : "Guest"}
+        </span>
           <Dropdown
             trigger={
               <button className="navbar__icon-btn" tabIndex={0}>

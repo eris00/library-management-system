@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import useHeaderData from '../../hooks/useHeaderData';
+import Activities from "../Activities/Activities";
+import "./Dashboard.css";
+import Statistics from "../../components/Statistics/Statistics";
 
 const Dashboard = () => {
   const { setHeaderData } = useHeaderData();
@@ -14,8 +17,10 @@ const Dashboard = () => {
   }, [setHeaderData]);
 
   return (
-    <div>
-      Dashboard Page
+    <div className="dashboard-wrapper">
+      <div className="dashboard-activities">
+        <Activities />
+      </div>
     </div>
   )
 }
