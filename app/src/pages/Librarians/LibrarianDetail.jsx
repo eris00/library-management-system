@@ -40,10 +40,25 @@ const LibrarianDetail = () => {
         src={librarian.photoPath || "https://kadkakozasto.com/wp-content/uploads/2023/01/Kad-Kako-Zasto-37.jpg"}
         alt={`${librarian.name} ${librarian.surname}`}
       />
-
+      
       <div className="author-detail__section">
         <h4 className="author-detail__label">Ime i Prezime</h4>
         <p className="author-detail__value">{librarian.name} {librarian.surname}</p>
+      </div>
+
+      <div className="author-detail__section">
+        <h4 className="author-detail__label">JMBG</h4>
+        <p className="author-detail__value">{librarian.jmbg}</p>
+      </div>
+
+      <div className="author-detail__section">
+        <h4 className="author-detail__label">Email</h4>
+        <p className="author-detail__value">{librarian.email}</p>
+      </div>
+
+            <div className="author-detail__section">
+        <h4 className="author-detail__label"> Korisničko ime </h4>
+        <p className="author-detail__value">{librarian.username}</p>
       </div>
 
       <div className="author-detail__actions">

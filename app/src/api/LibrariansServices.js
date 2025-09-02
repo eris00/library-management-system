@@ -3,7 +3,7 @@ import api from "./api";
 // Lista svih bibliotekara
 export const getAllLibrarians = async () => {
   try {
-    const { data } = await api.get("/users?role_id=1");
+    const { data } = await api.get(`/users?role_id=1`);
     // backend vraća data.data
     return data.data || [];
   } catch (err) {
@@ -29,10 +29,12 @@ export const getLibrarian = async (id) => {
 // Kreiranje bibliotekara
 export const createNewLibrarian = async (librarian) => {
   try {
-    const { data } = await api.post("/users/store", { ...librarian, role_id: 1 });
+    console.log("📤 Šaljem payload:", librarian);
+    const { data } = await api.post(`/users/store`, { ...librarian, role_id: 1 });
+    console.log("📥 Odgovor API:", data);
     return data.data;
   } catch (err) {
-    console.error("Greška API:", err);
+    console.error("❌ Greška API (createNewLibrarian):", err.response?.data || err);
     throw err;
   }
 };

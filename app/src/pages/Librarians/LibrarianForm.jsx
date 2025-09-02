@@ -55,7 +55,7 @@ export default function LibrarianForm({ initialValues = emptyLibrarian, onSubmit
             value={form.name}
             onChange={handleChange}
           />
-          {errors.firstName && <div className="authors-input__error">{errors.name}</div>}
+          {errors.name && <div className="authors-input__error">{errors.name}</div>}
         </div>
         <div>
           <input
@@ -65,7 +65,7 @@ export default function LibrarianForm({ initialValues = emptyLibrarian, onSubmit
             value={form.surname}
             onChange={handleChange}
           />
-          {errors.lastName && <div className="authors-input__error">{errors.surname}</div>}
+          {errors.surname && <div className="authors-input__error">{errors.surname}</div>}
         </div>
       </div>
 

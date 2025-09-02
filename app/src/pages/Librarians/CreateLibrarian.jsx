@@ -58,7 +58,8 @@ export default function CreateLibrarian() {
       toast.success("Bibliotekar je uspješno kreiran!");
       navigate("/librarians");
     } catch (err) {
-      setErrors({ global: "Došlo je do greške, pokušajte kasnije." });
+        console.error("❌ Backend greška:", err.response?.data || err.message);
+        setErrors({ global: "Došlo je do greške, pokušajte kasnije." });
     } finally {
       setSubmitting(false);
     }
