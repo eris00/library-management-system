@@ -11,6 +11,7 @@ import BookSpecificationDetails from "./BookSpecificationDetails";
 import BookMultimediaDetails from "./BookMultimediaDetails";
 import DetailBookSidebar from "./DetailBookSidebar";
 import RentEvidentionPage from "../../RentEvidention/RentEvidentionPage";
+import Activities from "../../Activities/Activities";
 
 
 const BookDetail = () => {
