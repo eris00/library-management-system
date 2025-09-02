@@ -1,10 +1,17 @@
 .rental-evidention-wrapper {
   display: flex;
   height: auto;
+  /* width: 70%; */
+  margin: 2rem 2rem;
+  gap: 1rem;
+}
+
+.main-rental-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .rental-menu {
-  margin-top: 4rem;
   width: 13vw;
   flex-shrink: 0;
   display: flex;
@@ -56,5 +63,5 @@
 }
 
 .rented-table__wrapper {
-  width: 81vw;
+  width: 100%;
 }

@@ -10,6 +10,7 @@ import BookBasicDetails from "./BookBasicDetails";
 import BookSpecificationDetails from "./BookSpecificationDetails";
 import BookMultimediaDetails from "./BookMultimediaDetails";
 import DetailBookSidebar from "./DetailBookSidebar";
+import RentEvidentionPage from "../../RentEvidention/RentEvidentionPage";
 
 
 const BookDetail = () => {
@@ -104,7 +105,7 @@ const BookDetail = () => {
               <BookSpecificationDetails bookData={bookData} />
             )}
             {activeTab === 'evidencija-iznajmljivanja' && (
-              <div>Evidencija iznajmljivanja</div>
+              <RentEvidentionPage />
             )}
             {activeTab === 'multimedija' && (
               <BookMultimediaDetails bookData={bookData} />

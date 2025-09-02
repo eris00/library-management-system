@@ -13,6 +13,7 @@ const RentalEvidention = () => {
   const [rents, setRents] = useState({}); // rents === borrowings
   const [reservations, setReservations] = useState({});
 
+
   const [fetchAllEvidentionError, setFetchAllEvidentionError] = useState(null);
   const [fetchAllEvidentionLoading, setFetchAllEvidentionLoading] = useState(true);
   const [fetchAllReservationError, setFetchAllReservationError] = useState(null);
@@ -21,7 +22,7 @@ const RentalEvidention = () => {
   const [activeTab, setActiveTab] = useState('izdate-knjige');
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
-  };
+  };  
 
   useEffect(() => {
     const controller = new AbortController();
@@ -100,13 +101,13 @@ const RentalEvidention = () => {
         <div className="rental-content">
           {activeTab === 'izdate-knjige' && (<RentedBooks data={rents.izdate} />)}
 
-          {activeTab === 'vracene-knjige' && (<ReturnedBooks />)}
+          {activeTab === 'vracene-knjige' && (<ReturnedBooks data={rents.vracene} />)}
 
-          {activeTab === 'knjige-u-prekoracenju' && (<OverdueBooks />)}
+          {activeTab === 'knjige-u-prekoracenju' && (<OverdueBooks data={rents.prekoracene} />)}
 
-          {activeTab === 'aktivne-rezervacije' && (<ActiveReservations />)}
+          {activeTab === 'aktivne-rezervacije' && (<ActiveReservations data={reservations.active} />)}
 
-          {activeTab === 'arhivirane-rezervacije' && (<ArchiveReservations />)}
+          {activeTab === 'arhivirane-rezervacije' && (<ArchiveReservations data={reservations.archive} />)}
         </div>
       </div>
     )

@@ -1,29 +1,33 @@
 import { BookUser, EllipsisVertical } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { formatDuration } from "../../../utils/bookUtils";
+import LoadingSpinner from "../../../components/ui/LoadingSpinner/LoadingSpinner";
 
 const RentedBooks = ({data}) => {
   
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  console.log(data);
-  
+  useEffect(() => {
+    if (data !== undefined && data !== null) {
+      setIsLoading(false);
+    }
+  }, [data]);
+    
 
   const columns = [
     {
       field: 'bookTitle',
       headerName: 'Naziv knjige',
-      width: 220,
+      width: 170,
     },
     {
       field: 'student',
       headerName: 'Izdato učeniku',
-      width: 250,
-
+      width: 220,
     },
     {
       field: 'rentDate',
@@ -73,6 +77,10 @@ const RentedBooks = ({data}) => {
     bookHold: formatDuration(row.borrow_date)
   }))
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className='rented-table__wrapper'>
       <DataGrid 
@@ -105,11 +113,6 @@ const RowMenu = ({ row }) => {
     setAnchorEl(null);
   };
 
-  const handleViewDetails = () => {
-    handleMenuClose();
-    navigate(`/book-detail/${row.id}`)
-  };
-
   return (
     <>
       <button onClick={handleMenuOpen} className='elipsis-button__wrapper'>
@@ -122,9 +125,12 @@ const RowMenu = ({ row }) => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
       >
-        <MenuItem onClick={handleViewDetails}><div className="menu-item__student"><BookUser className='dropdown-icons'/>Pogledaj Detalje</div></MenuItem>
+        <MenuItem onClick={() => {navigate(`/books/book-detail/${row.id}`)}}><div className="menu-item__student"><BookUser className='dropdown-icons'/>Pogledaj Detalje</div></MenuItem>
+        <MenuItem onClick={() => {navigate(`/books/writeoff-book/${row.id}`)}}><div className="menu-item__student"><BookUser className='dropdown-icons'/>Otpiši Knjigu</div></MenuItem>
+        <MenuItem onClick={() => {navigate(`/books/return-book/${row.id}`)}}><div className="menu-item__student"><BookUser className='dropdown-icons'/>Vrati Knjigu</div></MenuItem>
       </Menu>
     </>
+
   );
 }
 
